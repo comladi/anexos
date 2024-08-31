@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" rel="stylesheet" href="css-tic.css">
+<title>Base De Datos</title>
+</head>
+<body>
+<header>
+    <h1 class="titulo-principal">Para comprender la tecnología</h1>
+    <nav>
+        <ul class="lista-menu">
+            <li><a class="boton" href="programacion.html">Anterior</a></li>
+            <li><a class="boton" href="codigobinario.html">Siguiente</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="contenedor">
+        <h1 class="subtitulo">Base de Datos</h1>
+        <div class="contenido">
+            <h3 class="subtitulo-interno">Definición y Conceptos Básicos</h3>
+            <p class="parrafo-prosa">Una base de datos es un conjunto organizado de datos que se almacenan y se gestionan de manera que se facilite el acceso, la modificación, la eliminación y la administración de la información.</p>
+
+            <p class="parrafo-listas">Tipos de bases de datos:</p>
+            <p class="parrafo-prosa"><span class="enfasis">Relacionales:</span> Es una forma de organizar y almacenar información en la que los datos se estructuran en tablas que están relacionadas entre sí.</p>
+            <p class="parrafo-normal"><span class="enfasis">No relacionales:</span> Es un tipo de sistema de gestión de bases de datos que no utiliza el modelo de tablas y relaciones. Las bases de datos no relacionales no requieren que los datos se estructuren en tablas con filas y columnas.</p>
+
+            <p class="parrafo-listas">Modelos de Bases de Datos</p>
+            <ul class="lista-hitos-interna-b">
+                <li>Modelo jerárquico</li>
+                <li>Modelo de red</li>
+                <li>Modelo relacional</li>
+                <li>Modelo orientado a objetos</li>
+                <li>Modelo NoSQL</li>
+            </ul>
+            <p class="parrafo-listas">Diseño de Bases de Datos Relacionales</p>
+            <p class="parrafo-prosa"><span class="enfasis">Recolección de Requisitos:</span> Es el proceso de identificar y documentar las necesidades y expectativas de los usuarios y partes interesadas para el sistema de base de datos. Este paso inicial es crucial para asegurar que el diseño de la base de datos satisfaga las necesidades del negocio y soporte adecuadamente las operaciones que se realizarán.</p>
+            <p class="parrafo-prosa"><span class="enfasis">Diagramas Entidad-Relación:</span> Son representaciones gráficas que muestran la estructura de una base de datos en términos de entidades, relaciones y atributos. Son herramientas visuales que ayudan a conceptualizar y diseñar la estructura de la base de datos.</p>
+            <p class="parrafo-prosa">Componentes Clave:</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>Entidades: Representan objetos o conceptos del mundo real que se desean almacenar, como "Cliente" o "Producto".</li>
+                <li>Relaciones: Indican cómo las entidades están conectadas entre sí, como "Un cliente hace un pedido".</li>
+                <li>Atributos: Describen las características de las entidades, como "Nombre del Cliente" o "Fecha del Pedido".</li>
+            </ul>
+            <p class="parrafo-prosa"><span class="enfasis">Normalización de Bases de Datos:</span> Es el proceso de organizar los datos en una base de datos para reducir la redundancia y mejorar la integridad de los datos. Implica dividir las tablas grandes en tablas más pequeñas y definir relaciones entre ellas, siguiendo reglas específicas conocidas como formas normales.</p>
+            <p class="parrafo-prosa"><span class="enfasis">Clave Primaria:</span> Un campo o conjunto de campos en una tabla que identifica de manera única cada registro. No puede haber duplicados y debe ser único para cada registro en la tabla.</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>Propósito: Garantizar la unicidad de cada registro y proporcionar un identificador único para referenciarlo.</li>
+                <li>Ejemplo: En una tabla de "Clientes", un campo como "ID_Cliente" podría ser la clave primaria.</li>
+            </ul>
+            <p class="parrafo-prosa"><span class="enfasis">Clave Foránea:</span> Un campo en una tabla que se refiere a la clave primaria de otra tabla. Establece una relación entre las dos tablas y asegura la integridad referencial.</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>Propósito: Permitir la relación entre tablas y mantener la consistencia de los datos entre ellas.</li>
+                <li>Ejemplo: En una tabla de "Pedidos", el campo "ID_Cliente" podría ser una clave foránea que se refiere a la clave primaria en la tabla de "Clientes".</li>
+            </ul>
+            <h3 class="subtitulo-interno">Ejemplo - Descripción de las Tablas:</h3>
+            <p class="parrafo-prosa">Tabla Clientes:</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>ID_Cliente: Clave primaria que identifica de manera única a cada cliente.</li>
+                <li>Nombre: Nombre del cliente.</li>
+                <li>Email: Dirección de correo electrónico del cliente.</li>
+                <li>Teléfono: Número de teléfono del cliente.</li>
+            </ul>
+            <p class="parrafo-prosa">Tabla Pedidos:</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>ID_Pedido: Clave primaria que identifica de manera única a cada pedido.</li>
+                <li>ID_Cliente: Clave foránea que referencia al cliente que hizo el pedido, vinculando esta tabla con la tabla de Clientes.</li>
+                <li>Fecha: Fecha en que se realizó el pedido.</li>
+                <li>Total: Monto total del pedido.</li>
+            </ul>
+            <p class="parrafo-normal">La columna ID_Cliente en la tabla Pedidos es una clave foránea que se refiere a la columna ID_Cliente en la tabla Clientes. Esto establece una relación entre las dos tablas, indicando que cada pedido está asociado con un cliente específico.</p>
+            <h3 class="subtitulo-interno">Ejemplo de Consulta SQL</h3>
+            <p class="parrafo-prosa">Para obtener una lista de todos los pedidos junto con el nombre del cliente que los realizó, podrías usar la siguiente consulta SQL:</p>
+            <pre><code>
+SELECT Pedidos.ID_Pedido, Clientes.Nombre, Pedidos.Fecha, Pedidos.Total
+FROM Pedidos
+INNER JOIN Clientes ON Pedidos.ID_Cliente = Clientes.ID_Cliente;
+</code></pre>
+        </div>
+        <nav>
+            <ul class="lista-menu">
+                <li><a class="boton" href="programacion.html">Anterior</a></li>
+                <li><a class="boton" href="codigobinario.html">Siguiente</a></li>
+            </ul>
+        </nav>
+    </div>
+</main>
+<footer>
+    <ul class="lista-menu">
+        <li><a class="boton" href="modulos-tecnologia.html">Índice</a></li>
+    </ul>
+</footer>
+</body>
+</html>

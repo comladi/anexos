@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" rel="stylesheet" href="css-tic.css">
+<title>Código Binario</title>
+</head>
+<body>
+<header>
+    <h1 class="titulo-principal">Para comprender la tecnología</h1>
+    <nav>
+        <ul class="lista-menu">
+            <li><a class="boton" href="basededatos.html">Anterior</a></li>
+            <li><a class="boton" href="internet.html">Siguiente</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="contenedor">
+        <h1 class="subtitulo">Código Binario</h1>
+        <div class="contenido">
+            <h3 class="subtitulo-interno">Conceptos Básicos</h3>
+            <p class="parrafo-normal">El código binario es un sistema de representación de datos o instrucciones utilizando solo dos símbolos: 0 y 1. Este sistema se llama binario porque utiliza dos dígitos.</p>
+            
+            <h3 class="subtitulo-interno">Sistemas de Numeración</h3>
+            <p class="parrafo-listas">Sistema Decimal</p>
+            <p class="parrafo-normal">El sistema decimal es el sistema numérico más comúnmente utilizado y está basado en 10 dígitos: 0, 1, 2, 3, 4, 5, 6, 7, 8, y 9. Cada posición en un número decimal representa una potencia de 10.</p>
+            
+            <p class="parrafo-listas">Sistema Binario</p>
+            <p class="parrafo-prosa">Bit (Binary Digit):</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>La unidad más pequeña de datos en el sistema binario. Puede tener uno de dos valores posibles: 0 o 1.</li>
+                <li>Ejemplo: Un solo bit puede ser 0 o 1.</li>
+            </ul>
+            <p class="parrafo-prosa">Byte:</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>Una agrupación de 8 bits. Es la unidad básica de almacenamiento en las computadoras.</li>
+                <li>Ejemplo: 10101100 es un byte, compuesto por 8 bits.</li>
+            </ul>
+            <p class="parrafo-prosa">Conversión de Decimal a Binario</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>1. Dividir por 2: Divide el número decimal por 2.</li>
+                <li>2. Anotar el residuo: Anota el residuo (0 o 1). Este residuo será el bit menos significativo (derecha).</li>
+                <li>3. Repetir: Toma el cociente y repite el proceso hasta que el cociente sea 0.</li>
+                <li>4. Leer de abajo hacia arriba: Los residuos leídos de abajo hacia arriba forman el número binario.</li>
+            </ul>
+            <p class="parrafo-prosa">Ejemplo: Convertir 13 a binario</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>1. 13 ÷ 2 = 6, residuo 1</li>
+                <li>2. 6 ÷ 2 = 3, residuo 0</li>
+                <li>3. 3 ÷ 2 = 1, residuo 1</li>
+                <li>4. 1 ÷ 2 = 0, residuo 1</li>
+            </ul>
+            <p class="parrafo-prosa">Leyendo los residuos de abajo hacia arriba: 1101</p>
+            
+            <p class="parrafo-prosa">Conversión de Binario a Decimal</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>1. Escribir las posiciones: Escribe el número binario y las posiciones (potencias de 2) desde la derecha empezando en 0.</li>
+                <li>2. Multiplicar: Multiplica cada dígito binario por 2 elevado a la posición correspondiente.</li>
+                <li>3. Sumar: Suma todos los resultados.</li>
+            </ul>
+            <p class="parrafo-prosa">Ejemplo: Convertir 1101 a decimal</p>
+            <ul class="lista-hitos-interna-b">
+                <li>1.- Posiciones: 2^3, 2^2, 2^1, 2^0</li>
+                <li>2.- 1×2^3 + 1×2^2 + 0×2^1 + 1×2^0</li>
+                <li>3.- 1×8 + 1×4 + 0×2 + 1×1</li>
+                <li>4.- 8 + 4 + 0 + 1 = 13</li>
+            </ul>
+
+            <h3 class="subtitulo-interno">Representación de Datos en Binario</h3>
+            <p class="parrafo-listas">Representación de caracteres: ASCII y Unicode</p>
+            <p class="parrafo-prosa"><span class="enfasis">ASCII (American Standard Code for Information Interchange):</span></p>
+            <p class="parrafo-prosa">ASCII es un estándar de codificación que utiliza 7 u 8 bits para representar caracteres.</p>
+            <p class="parrafo-prosa">Los primeros 128 caracteres (usando 7 bits) incluyen letras, dígitos, y algunos símbolos y comandos de control.</p>
+            <p class="parrafo-prosa">Ejemplo:</p>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>La letra 'A' en ASCII se representa como 01000001.</li>
+                <li>La letra 'a' en ASCII se representa como 01100001.</li>
+            </ul>
+            <p class="parrafo-prosa"><span class="enfasis">Unicode:</span></p>
+            <p class="parrafo-prosa">Unicode es un estándar de codificación más amplio que puede representar caracteres de casi todos los sistemas de escritura del mundo.</p>
+            <p class="parrafo-prosa">Utiliza múltiples bytes (generalmente 16 bits o más) para cada carácter.</p>
+            <p class="parrafo-prosa">Ejemplo:</p>
+            <ul class="lista-hitos-interna-b">
+                <li>La letra 'A' en Unicode también se representa como 01000001 (en UTF-8, que es compatible con ASCII para los primeros 128 caracteres).</li>
+                <li>El carácter '你' (chino) se representa en Unicode (UTF-8) como 11100100 10111000 10101010.</li>
+            </ul>
+            <h3 class="subtitulo-interno">Relación entre Código Binario y Hardware</h3>
+            <ul class="lista-hitos-interna-b-dos">
+                <li>Almacenamiento de datos en memoria</li>
+                <li>Comunicación de datos en redes</li>
+                <li>Procesamiento de instrucciones en CPU</li>
+            </ul>
+        </div>
+    </div>
+    <nav>
+        <ul class="lista-menu">
+            <li><a class="boton" href="basededatos.html">Anterior</a></li>
+            <li><a class="boton" href="internet.html">Siguiente</a></li>
+        </ul>
+    </nav>
+</main>
+<footer>
+    <ul class="lista-menu">
+        <li><a class="boton" href="modulos-tecnologia.html">Índice</a></li>
+    </ul>
+</footer>
+</body>
+</html>
