@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="19.159163in"
+   height="8.6528196in"
+   viewBox="0 0 486.64273 219.78162"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="Estructura.svg"
+   inkscape:export-filename="D:\Users\Tona\Downloads\Cursos\Historia\Editables\Estructura.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient880">
+      <stop
+         style="stop-color:#38a11d;stop-opacity:1;"
+         offset="0"
+         id="stop876" />
+      <stop
+         style="stop-color:#38a11d;stop-opacity:0;"
+         offset="1"
+         id="stop878" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient872"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#0a3d3d;stop-opacity:0.90588236;"
+         offset="0"
+         id="stop870" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient872"
+       id="linearGradient874"
+       x1="26.458332"
+       y1="225.17731"
+       x2="183.5195"
+       y2="225.17731"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.89461811,0,0,1,11.052237,-100.01255)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient880"
+       id="radialGradient882"
+       cx="106.46991"
+       cy="126.76953"
+       fx="106.46991"
+       fy="126.76953"
+       r="46.730343"
+       gradientTransform="matrix(1,0,0,0.35417658,0,81.870733)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient880"
+       id="radialGradient906"
+       cx="105.27039"
+       cy="128.35106"
+       fx="105.27039"
+       fy="128.35106"
+       r="45.035461"
+       gradientTransform="matrix(1,0,0,0.01515472,-0.52916667,67.15741)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.73"
+     inkscape:cx="597.94521"
+     inkscape:cy="448.63014"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <sodipodi:guide
+       position="236.21137,32.432615"
+       orientation="0,-1"
+       id="guide2994"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="254.48023,-3.6851119"
+       orientation="0,-1"
+       id="guide2998"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="217.62754,-6.7975169"
+       orientation="1,0"
+       id="guide3000"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="346.8324,25.335062"
+       orientation="1,0"
+       id="guide3049"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="331.62646,1.7861311"
+       orientation="0,-1"
+       id="guide3102"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="192.21843,87.365156"
+       orientation="0,-1"
+       id="guide12629"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="178.03066,153.40226"
+       orientation="1,0"
+       id="guide12631"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.65369567,22.701514)">
+    <path
+       sodipodi:type="star"
+       style="opacity:0.62;fill:#ececec;fill-opacity:0.930894;stroke:none;stroke-width:0.992;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.878049;paint-order:stroke fill markers"
+       id="path10"
+       sodipodi:sides="3"
+       sodipodi:cx="122.15869"
+       sodipodi:cy="172.26064"
+       sodipodi:r1="169.09489"
+       sodipodi:r2="84.54744"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 268.59917,256.80808 -292.880953,0 L 122.15869,3.165741 Z"
+       inkscape:transform-center-y="-36.630269"
+       transform="matrix(0.71233456,0,0,0.86650208,17.950449,-25.444635)"
+       inkscape:export-filename="Estructura.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;line-height:1.25;font-family:Algerian;-inkscape-font-specification:'Algerian, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0a3e3e;fill-opacity:0.960784;stroke:#38a11d;stroke-width:0.266476;stroke-opacity:0.268456"
+       x="27.818394"
+       y="169.44771"
+       id="text841"
+       transform="scale(1.0071531,0.9928977)"><tspan
+         sodipodi:role="line"
+         id="tspan839"
+         x="27.818394"
+         y="169.44771"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:Algerian;-inkscape-font-specification:'Algerian, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0a3e3e;fill-opacity:0.960784;stroke:#38a11d;stroke-width:0.266476;stroke-opacity:0.268456">ESTRUCTURA</tspan></text>
+    <path
+       style="fill:#00ffff;fill-opacity:1;stroke:url(#radialGradient906);stroke-width:3.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.88255"
+       d="m 59.70576,69.102518 h 90.07092"
+       id="path849" />
+    <path
+       style="fill:none;stroke:url(#linearGradient874);stroke-width:1.3857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 34.722347,125.16426 H 175.23217"
+       id="path851" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.1694px;line-height:1.25;font-family:Algerian;-inkscape-font-specification:'Algerian, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;fill-opacity:0.751678;stroke:#0a0c48;stroke-width:0.264583;stroke-opacity:0.614094"
+       id="text837"
+       y="65.076134"
+       x="59.739567"><tspan
+         sodipodi:role="line"
+         id="tspan835"
+         x="59.739567"
+         y="65.076134"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.1694px;font-family:Algerian;-inkscape-font-specification:'Algerian, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;fill-opacity:0.751678;stroke:#0a0c48;stroke-width:0.264583;stroke-opacity:0.614094">      SÚPER</tspan><tspan
+         sodipodi:role="line"
+         x="59.739567"
+         y="84.037888"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.1694px;font-family:Algerian;-inkscape-font-specification:'Algerian, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;fill-opacity:0.751678;stroke:#0a0c48;stroke-width:0.264583;stroke-opacity:0.614094"
+         id="tspan860">ESTRUCTURA</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="405.30618"
+       y="175.34723"
+       id="text20"><tspan
+         sodipodi:role="line"
+         id="tspan18"
+         x="405.30618"
+         y="175.34723"
+         style="stroke-width:0.264583">Fuerza productiva</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="393.12698"
+       y="139.95219"
+       id="text24"><tspan
+         sodipodi:role="line"
+         id="tspan22"
+         x="394.96143"
+         y="139.95219"
+         style="stroke-width:0.264583">Materia prima </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="384.02194"
+       y="156.99477"
+       id="text28"><tspan
+         sodipodi:role="line"
+         id="tspan26"
+         x="384.02194"
+         y="156.99477"
+         style="stroke-width:0.264583">Maquinaria</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="417.06549"
+       y="191.74258"
+       id="text32"><tspan
+         sodipodi:role="line"
+         id="tspan30"
+         x="417.06549"
+         y="191.74258"
+         style="stroke-width:0.264583">Relaciones de trabajo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="268.97012"
+       y="164.49524"
+       id="text1375"><tspan
+         sodipodi:role="line"
+         id="tspan1373"
+         style="font-size:14.1111px;fill:#000000;stroke-width:0.264583"
+         x="268.97012"
+         y="164.49524"> Base económica</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="209.26256"
+       y="48.728928"
+       id="text4757"><tspan
+         sodipodi:role="line"
+         id="tspan4755"
+         style="stroke-width:0.264583"
+         x="209.26256"
+         y="48.728928">Ideología</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="204.56728"
+       y="72.923744"
+       id="text5535"><tspan
+         sodipodi:role="line"
+         id="tspan5533"
+         style="stroke-width:0.264583"
+         x="204.56728"
+         y="72.923744">Jurídica</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="201.4679"
+       y="100.3651"
+       id="text6637"><tspan
+         sodipodi:role="line"
+         id="tspan6635"
+         style="stroke-width:0.264583"
+         x="201.4679"
+         y="100.3651">Política</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:81.9496px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.42682"
+       x="204.14456"
+       y="191.9201"
+       id="text297"
+       transform="scale(1.0110255,0.98909473)"><tspan
+         sodipodi:role="line"
+         id="tspan295"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:81.9496px;font-family:SimSun-ExtB;-inkscape-font-specification:SimSun-ExtB;stroke-width:0.42682"
+         x="204.14456"
+         y="191.9201">{</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:81.9496px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.42682"
+       x="162.49548"
+       y="99.434456"
+       id="text297-0"
+       transform="scale(1.0110255,0.98909473)"><tspan
+         sodipodi:role="line"
+         id="tspan295-7"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:81.9496px;font-family:SimSun-ExtB;-inkscape-font-specification:SimSun-ExtB;stroke-width:0.42682"
+         x="162.49548"
+         y="99.434456">{</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:82.9535px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;text-anchor:middle;stroke-width:0.432049"
+       x="337.71936"
+       y="190.20508"
+       id="text297-9"
+       transform="scale(0.99879036,1.0012111)"><tspan
+         sodipodi:role="line"
+         id="tspan295-5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:82.9535px;font-family:SimSun-ExtB;-inkscape-font-specification:SimSun-ExtB;stroke-width:0.432049"
+         x="337.71936"
+         y="190.20508">{</tspan></text>
+  </g>
+</svg>
