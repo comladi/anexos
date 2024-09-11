@@ -96,9 +96,10 @@ html, body, ol, ul, li, a, * {
 /* Fin Configuración Títulos */
 
 /* Configuración Párrafo */
+
 .parrafo-prosa {
-  text-align: justify;
-  text-indent: 3em;
+  text-align: center;
+//  text-indent: 3em;
   line-height: 1.5;
   padding-bottom: 1em;
 }
