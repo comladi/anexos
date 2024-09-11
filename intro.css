@@ -9,6 +9,22 @@ html, body, ol, ul, li, a, * {
 *, *::after, *::before {
   box-sizing: inherit;
 }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+   header {
+            background-color: #2b2d42;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
 /* Fin Configuración HTML */
 
 /* Configuración Contenedores */
@@ -21,10 +37,11 @@ html, body, ol, ul, li, a, * {
 }
 
 .contenido-index {
-  margin-bottom: 1em;
-  padding: 1em;
-  max-width: 720px;
-  box-shadow: 1px 2px 7px rebeccapurple;
+   max-width: 800px;
+            margin: 2em auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 /* Fin Configuración Contenedores */
 
@@ -63,8 +80,9 @@ html, body, ol, ul, li, a, * {
 /* Fin Configuración Botones */
 
 /* Configuración Títulos */
+
 .titulo-general {
-  color: #000;
+  color: snow;
   font-size: 2em;
   text-shadow: -1px 1.5px 0px silver;
   padding: 0;
@@ -92,3 +110,11 @@ html, body, ol, ul, li, a, * {
   margin-top: 1em;
 }
 /* Fin Configuración Párrafo */
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #2b2d42;
+            color: white;
+        }
