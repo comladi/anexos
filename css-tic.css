@@ -1,3 +1,4 @@
+/* Reset y configuraciones globales */
 html, body, ol, ul, li, a, * {
     margin: 0;
     padding: 0;
@@ -9,91 +10,114 @@ html, body, ol, ul, li, a, * {
     box-sizing: inherit;
 }
 
+/* Estilo base del cuerpo */
 body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #121212; /* Fondo negro profundo */
-    color: #e0e0e0;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    background-color: #0a0f24;
+    color: #d8e0ff;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
 }
 
+/* Encabezado */
 header {
     padding: 2em 0;
-    background-color: #1e1e1e; /* Negro menos profundo */
-    color: #e0e0e0;
+    background-color: #141b38;
+    color: #d8e0ff;
     text-align: center;
     margin-bottom: 2em;
-    border-bottom: 2px solid #333; /* Gris oscuro */
+    border-bottom: 2px solid #00d4ff;
 }
 
+/* Pie de página */
 footer {
     padding: 2em 0;
-    background-color: #1e1e1e; /* Negro menos profundo */
-    color: #e0e0e0;
+    background-color: #141b38;
+    color: #d8e0ff;
     text-align: center;
     margin-top: 2em;
-    border-top: 2px solid #333; /* Gris oscuro */
+    border-top: 2px solid #00d4ff;
 }
 
+/* Contenedor principal */
 .contenedor {
     display: flex;
     flex-direction: column;
-    margin: 0 1.5em;
-    align-content: center;
+    margin: 0 2em;
+    align-items: center;
 }
 
+/* Contenido genérico */
 .contenido {
-    background-color: #1e1e1e; /* Negro menos profundo */
+    background-color: #141b38;
     margin-bottom: 1.5em;
-    padding: 1.5em;
-    border-radius: 8px;
-    border: 1px solid #333; /* Gris oscuro */
+    padding: 2em;
+    border-radius: 10px;
+    border: 1px solid #00d4ff;
+    transition: transform 0.3s ease;
 }
 
+.contenido:hover {
+    transform: translateY(-5px);
+}
+
+/* Contenido específico del índice */
 .contenido-index {
     margin-bottom: 1.5em;
-    padding: 1.5em;
-    max-width: 500px;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
+    padding: 2em;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
 }
 
+/* Contenido de notas */
 .contenido-notas {
-    background-color: #d70f64; /* Color del logotipo de Debian */
+    background-color: #ff2079;
     margin: 0;
     padding: 1.5em;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .contenido li {
     padding: 0 0 1.5em;
     text-align: left;
-    color: #e0e0e0;
+    color: #d8e0ff;
 }
 
+/* Contenedor de módulos */
 .contenedor-modulos {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: 0 2em;
+    gap: 2em;
 }
 
 .contenedor-modulos > .contenido-modulos {
-    flex: 1 1 auto;
-    margin: 1.5em;
-    background-color: #121212; /* Fondo negro profundo */
-    border: 1px solid #333; /* Gris oscuro */
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
+    flex: 1 1 300px;
+    margin: 0;
+    background-color: #0a0f24;
+    border: 1px solid #00d4ff;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
 }
 
 .contenido-modulos:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
 }
 
-@media(max-width: 800px) {
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
     .contenedor-modulos {
         flex-direction: column;
+        margin: 0 1em;
     }
 }
 
@@ -102,117 +126,80 @@ footer {
 }
 
 .contenido-modulos a {
-    color: #ff9f00; /* Naranja más contrastante */
-    font-size: 1.2em; /* Tamaño aumentado */
-    transition: color 0.3s ease, font-size 0.3s ease;
+    color: #00d4ff;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contenido-modulos a:hover {
-    color: #ffcc00; /* Naranja más brillante */
-    font-size: 1.3em; /* Tamaño aumentado */
+    color: #ff9f00;
 }
 
+/* Menú */
 .lista-menu {
-    list-style: none;
     display: flex;
     justify-content: center;
-    padding: 0;
+    padding: 1em 0;
 }
 
 .lista-menu li {
-    display: flex;
-    justify-content: center;
     padding: 1em;
-    margin: 0 auto;
 }
 
+/* Listas de hitos */
 .lista-hitos li {
     display: flex;
     flex-direction: column;
-    justify-content: left;
     text-indent: 2em;
     line-height: 1.5;
-    color: #e0e0e0;
+    color: #d8e0ff;
 }
 
-.lista-hitos-interna li {
-    padding-left: 3em;
-    color: #e0e0e0;
-}
-
-.lista-hitos-interna-b li {
-    padding-left: 4em;
-    color: #e0e0e0;
-}
-
-.lista-hitos-interna-b-dos li {
-    padding-left: 4em;
-    color: #e0e0e0;
-}
-
-.lista-hitos-interna-c li {
-    padding-left: 4em;
-    color: #e0e0e0;
-}
-
+.lista-hitos-interna li, 
+.lista-hitos-interna-b li, 
+.lista-hitos-interna-b-dos li, 
+.lista-hitos-interna-c li, 
 .lista-hitos-interna-d li {
-    padding-left: 5em;
-    color: #e0e0e0;
+    padding-left: 3em;
+    color: #d8e0ff;
 }
 
-dl {
-    margin: 0;
-    padding: 0;
-}
+/* Definiciones */
+dl { margin: 0; padding: 0; }
+dt { font-size: 1.4em; color: #d8e0ff; padding-bottom: 1em; text-align: left; }
+dd { font-size: 1.2em; color: #d8e0ff; padding-bottom: 1em; text-indent: 3em; text-align: left; font-style: italic; }
 
-dt {
-    font-size: 1.4em; /* Tamaño aumentado */
-    color: #e0e0e0;
-    margin: 0;
-    padding-bottom: 1em;
-    text-align: left;
-}
-
-dd {
-    font-size: 1.2em; /* Tamaño aumentado */
-    color: #e0e0e0;
-    margin: 0;
-    padding-bottom: 1em;
-    text-indent: 3em;
-    text-align: left;
-    font-style: italic;
-}
-
+/* Botones */
 .boton {
     border-radius: 5px;
+    background-color: #00d4ff;
+    color: #0a0f24;
+    padding: 0.7em 1.5em;
     text-decoration: none;
-    background-color: #333; /* Gris oscuro */
-    color: #e0e0e0;
-    padding: 0.5em 1em;
-    cursor: pointer;
-    border: 1px solid #444;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .boton:hover {
-    background-color: #444;
-    color: #ffffff;
+    background-color: #ff9f00;
 }
 
 .boton-historia {
-    background-color: #444;
+    background-color: #ff2079;
 }
 
 .boton-historia:hover {
-    background-color: #666;
+    background-color: #ff9f00;
 }
 
+/* Títulos */
 .titulo-general {
-    color: #e0e0e0;
-    font-size: 2.2em; /* Tamaño aumentado */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
-    padding: 0;
-    margin: 0;
+    color: #d8e0ff;
+    font-size: 2.2em;
+    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 3px;
     font-weight: bold;
@@ -220,11 +207,10 @@ dd {
 }
 
 .titulo-principal {
-    color: #8be9fd; /* SUSE */
-    font-size: 1.6em; /* Tamaño aumentado */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
-    padding: 0;
-    margin: 0 0 1em 0;
+    color: #00d4ff;
+    font-size: 1.8em;
+    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
+    margin-bottom: 1em;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
@@ -232,100 +218,88 @@ dd {
 }
 
 .subtitulo {
-    color: #ffb86c; /* Naranja más suave */
-    font-size: 1.6em; /* Tamaño aumentado */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
-    padding: 0;
-    margin: 0 0 1.5em 0;
+    color: #ff9f00;
+    font-size: 1.6em;
+    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
+    margin-bottom: 1.5em;
     text-transform: capitalize;
-    text-align: center;
     letter-spacing: 1px;
     font-weight: bold;
+    text-align: center;
 }
 
 .sub-subtitulo {
     font-weight: bold;
     margin-bottom: 1em;
+    color: #d8e0ff;
 }
 
-.subtitulo-interno {
-    color: #f1fa8c; /* Ubuntu */
-    font-size: 1.2em; /* Tamaño aumentado */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
+.subtitulo-interno, .subtitulo-interno-b {
+    color: #ff2079;
+    font-size: 1.3em;
+    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
     padding-top: 1em;
-    margin: 0 0 1em 0;
+    margin-bottom: 1em;
     text-transform: capitalize;
     letter-spacing: 1px;
     font-weight: bold;
     text-align: left;
 }
 
-.subtitulo-interno-b {
-    color: #f1fa8c; /* Ubuntu */
-    font-size: 1.2em; /* Tamaño aumentado */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sombra más sutil */
-    text-transform: capitalize;
-    font-weight: bold;
+/* Párrafos */
+.parrafo-listas, .parrafo-listas-em {
     text-align: left;
-}
-
-.parrafo-listas {
-    text-align: left;
-    font-size: 1.2em; /* Tamaño aumentado */
+    font-size: 1.2em;
     font-weight: bold;
     padding-bottom: 1.5em;
     margin-top: 1.5em;
-    color: #e0e0e0;
-}
-
-.parrafo-listas-em {
-    text-align: left;
-    font-size: 1.2em; /* Tamaño aumentado */
-    font-weight: bold;
-    padding-bottom: 1.5em;
-    margin-top: 1.5em;
-    color: #e0e0e0;
+    color: #d8e0ff;
 }
 
 .parrafo-prosa {
     text-align: left;
-    font-size: 1.1em; /* Tamaño aumentado */
+    font-size: 1.1em;
     margin-bottom: 1em;
-    color: #e0e0e0;
+    color: #d8e0ff;
 }
 
 .parrafo-referencia {
     text-align: left;
-    font-size: 1.1em; /* Tamaño aumentado */
+    font-size: 1.1em;
     margin-bottom: 1em;
-    color: #00ff00; /* Verde para referencias */
+    color: #00ff00;
     font-style: italic;
 }
 
+/* Código (corregido para evitar sobreposición) */
 pre, code {
-    background-color: #121212; /* Fondo negro profundo */
-    color: #00ffff; /* Cyan para code */
+    background-color: #1e2a44; /* Fondo más claro para contraste */
+    color: #00ffff; /* Cian brillante */
     padding: 1em;
-    border-radius: 8px;
-    border: 1px solid #333; /* Gris oscuro */
-    overflow-x: auto; /* Añadido para evitar desbordamiento horizontal */
-    word-wrap: break-word; /* Ajusta el texto largo para que se ajuste */
-}
-
-pre {
-    white-space: pre-wrap; /* Ajustar el texto en múltiples líneas */
-    word-break: break-all; /* Rompe palabras largas si es necesario */
+    border-radius: 10px;
+    border: 1px solid #00d4ff;
+    overflow-x: auto;
+    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre; /* Respeta saltos de línea y espacios como en el original */
+    line-height: 1.5; /* Espaciado claro entre líneas */
 }
 
 code {
-    display: inline-block; /* Asegura que el código se ajuste dentro de los elementos */
     font-size: 1em;
+    display: inline-block; /* Para códigos inline */
+    white-space: pre-wrap; /* Solo para inline, permite ajuste */
 }
 
-/* Ajustes adicionales para dispositivos móviles */
-@media(max-width: 800px) {
-    pre, code {
-        font-size: 0.9em; /* Ajustar el tamaño del texto en pantallas pequeñas */
-        padding: 0.5em; /* Reducir el padding para ajustarse mejor */
-    }
+/* Responsividad */
+@media (max-width: 800px) {
+    .contenedor { margin: 0 1em; }
+    .titulo-general { font-size: 1.8em; }
+    .titulo-principal { font-size: 1.5em; }
+    pre, code { font-size: 0.9em; padding: 0.5em; }
+}
+
+@media (max-width: 600px) {
+    .contenedor-modulos > .contenido-modulos { flex: 1 1 100%; }
+    .contenido { padding: 1em; }
 }
