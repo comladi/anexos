@@ -1,20 +1,28 @@
 @media only screen and (max-width: 300px) {
     ul, ol {
-        padding-left: 10px; /* Reducir el padding izquierdo */
+        padding-left: 12px; /* Ligeramente mayor para dar un poco más de aire */
     }
 
     ul li, ol li {
-        font-size: 0.9em; /* Ajustar el tamaño de letra para una lectura cómoda */
-        padding-left: 5px; /* Ajuste adicional del padding para los elementos de lista */
-        margin-bottom:7px;
-	line-height: 1.4; /* Mejorar la legibilidad ajustando el espacio entre líneas */
+        font-size: 0.95em; /* Tamaño base en pantallas pequeñas */
+        padding-left: 8px; /* Incrementé para mejor separación visual */
+        margin-bottom: 8px; /* Ajusté para consistencia */
+        line-height: 1.5; /* Aumenté ligeramente para más claridad */
+    }
+
+    /* Reducción para listas numeradas anidadas en pantallas pequeñas */
+    ol ol li, .lista-hitos-interna li {
+        font-size: 0.9em; /* Nivel 2 */
+    }
+
+    ol ol ol li, ol ol .lista-hitos-interna li {
+        font-size: 0.85em; /* Nivel 3 o más profundo */
     }
 
     .lista-viñetas-secundaria, .lista-hitos-interna, .lista-viñetas-terciaria {
-        padding-left: 7px; /* Ajustar el padding para los niveles más profundos */
+        padding-left: 10px; /* Incrementé para diferenciar niveles más profundos */
     }
 }
-
 
 body {
     background-color: #f4f1e3;
@@ -185,8 +193,18 @@ footer {
     margin-left: 3px;
     margin-bottom: 20px;
     line-height: 1.6;
-    font-size: 1.2em;
+    font-size: 1.2em; /* Tamaño base */
     color: #5f370e;
+}
+
+/* Listas numeradas anidadas (nivel 2) */
+ol .lista-numerada, ol .lista-hitos-interna {
+    font-size: 1.1em; /* Reducido un poco */
+}
+
+/* Listas numeradas anidadas (nivel 3 o más profundo) */
+ol ol .lista-numerada, ol ol .lista-hitos-interna {
+    font-size: 1.0em; /* Más pequeño */
 }
 
 .lista-viñetas {
@@ -230,7 +248,7 @@ footer {
     margin-left: 20px;
     margin-bottom: 15px;
     line-height: 1.4;
-    font-size: 1.1em;
+    font-size: 1em; /* Tamaño base, se reducirá si está anidada */
     color: #704214;
 }
 
@@ -279,36 +297,34 @@ nav .boton-historia.nav-derecha {
     clear: both;
 }
 
-	/*Imagen*/
-
-.contenedor-imagen{
-display:flex;
-flex-direction:column;
-text-align:center;
-margin:0;
-padding:0;
+/* Imagen */
+.contenedor-imagen {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-.contenido-imagen{
-width:100%;
-height:auto;
-margin:0;
-padding:0;
+.contenido-imagen {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }
 
-.contenido-imagen-dos{
-width:100%;
-height:auto;
-padding-bottom:1em;
+.contenido-imagen-dos {
+    width: 100%;
+    height: auto;
+    padding-bottom: 1em;
 }
 
-img{
-max-width:100%;
-max-height: 100vh;
-width: auto;
-height: auto;
-margin:0;
-padding:0;
+img {
+    max-width: 100%;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }
-
-	/*Fin Imagen*/
+/* Fin Imagen */
