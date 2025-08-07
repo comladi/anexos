@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CursoCripto - Aprende sobre criptomonedas de forma fácil y práctica.">
+    <title>CursoCripto - Aprende Criptomonedas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .navbar .logo:hover {
+            color: #00ccff;
+            transform: scale(1.1);
+            text-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00ccff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00ccff;
+            transform: scale(1.1);
+            text-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+        }
+
+        /* Menú de hamburguesa */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Contenedor de contenido dinámico */
+        .content-container {
+            padding: 2rem;
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            min-height: calc(100vh - 100px);
+            background: linear-gradient(135deg, #00ccff, #0066cc);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+
+        .content {
+            display: none;
+            width: 100%;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-button {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos para el enlace del curso */
+        .course-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            display: inline-block;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .course-link:hover {
+            color: #00ccff;
+            transform: scale(1.05);
+        }
+
+        /* Estilos para el carrusel */
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .module {
+            min-width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .module h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .module p {
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .carousel-button:hover {
+            background-color: #00ccff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-button.hidden {
+            visibility: hidden;
+        }
+
+        .carousel-button.prev {
+            left: 0;
+        }
+
+        .carousel-button.next, .carousel-button.back {
+            right: 0;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin: 0.5rem auto 0;
+            width: 100%;
+            max-width: 600px;
+            padding: 0;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .carousel-dot.active {
+            background-color: #00ccff;
+            transform: scale(1.2);
+        }
+
+        /* Estilo para enlaces en Contacto */
+        .content a.email-link {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .content a.email-link:hover {
+            color: #e6b800;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #1a1a1a;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .content-container {
+                padding: 1rem;
+                min-height: calc(100vh - 60px);
+            }
+
+            .content h1 {
+                font-size: 1.8rem;
+            }
+
+            .content p {
+                font-size: 1rem;
+                max-width: 90%;
+            }
+
+            .module h3 {
+                font-size: 1.3rem;
+            }
+
+            .module p {
+                font-size: 0.9rem;
+            }
+
+            .carousel {
+                max-width: 90%;
+            }
+
+            .carousel-button {
+                padding: 0.3rem 0.6rem;
+                font-size: 1rem;
+            }
+
+            .carousel-dots {
+                margin-top: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#inicio" class="logo" onclick="showContent('inicio')">CursoCripto</a>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active" onclick="showContent('inicio')">Inicio</a></li>
+                <li><a href="#cursos" onclick="showContent('cursos')">Cursos</a></li>
+                <li><a href="#sobre-nosotros" onclick="showContent('sobre-nosotros')">Sobre Nosotros</a></li>
+                <li><a href="#contacto" onclick="showContent('contacto')">Contacto</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor dinámico para el contenido -->
+    <div class="content-container" id="content-container">
+        <div id="inicio-content" class="content active">
+            <h1>El Futuro del Dinero</h1>
+            <p>¿Te has preguntado cómo será el dinero en los próximos años? El efectivo desaparece, las apps reemplazan a los bancos, y tecnologías como las monedas digitales de bancos centrales (CBDC), stablecoins y blockchain están transformando cómo pagamos, ahorramos e invertimos. En este nuevo panorama, la educación financiera ya no es opcional, es esencial.</p>
+            <p>Según la UNESCO, 773 millones de personas carecen de alfabetización básica, y dos de cada tres adultos no comprenden conceptos clave como inflación, blockchain o tasas de interés (S&P Global, 2014). ¿Cómo participar en esta nueva economía sin conocimientos fundamentales? La respuesta está en prepararte hoy.</p>
+            <a href="#cursos" class="cta-button" onclick="showContent('cursos')">🎓 Únete al curso “¿Qué son las criptomonedas?”</a>
+        </div>
+        <div id="cursos-content" class="content">
+            <h1>Nuestros Cursos</h1>
+            <p>🎓 Únete al curso “¿Qué son las criptomonedas?”</p>
+            <p>Por solo 3,500 MXN, este curso te guiará paso a paso para comprender, de manera clara y práctica, las tecnologías que están redefiniendo la economía global.</p>
+            <p>No necesitas ser experto en finanzas o tecnología. Está diseñado especialmente para quien quiere estar un paso adelante.</p>
+            <a href="#curso-101" class="course-link" onclick="showContent('curso-101')">Curso 101: ¿Qué son las criptomonedas?</a>
+        </div>
+        <div id="curso-101-content" class="content">
+            <h1>Curso 101: ¿Qué son las criptomonedas?</h1>
+            <p>✅ ¿Qué aprenderás?</p>
+            <div class="carousel">
+                <div class="carousel-inner" id="carousel-inner-curso">
+                    <div class="module">
+                        <h3>Monedas Digitales de Bancos Centrales (CBDC)</h3>
+                        <p>Explora las monedas digitales de bancos centrales, su impacto en la economía global y cómo funcionan.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Stablecoins</h3>
+                        <p>Aprende sobre stablecoins, monedas digitales diseñadas para mantener un valor estable y su uso en transacciones.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Blockchain</h3>
+                        <p>Entiende el corazón de las criptomonedas: blockchain, una tecnología que garantiza seguridad y descentralización.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Pagos Instantáneos</h3>
+                        <p>Descubre cómo los pagos instantáneos están transformando las transacciones, explicado de forma sencilla.</p>
+                    </div>
+                </div>
+                <button class="carousel-button prev" id="prev-button-curso" onclick="moveSlideCurso(-1)">&lt;</button>
+                <button class="carousel-button next" id="next-button-curso" onclick="moveSlideCurso(1)">&gt;</button>
+                <a href="#cursos" class="carousel-button back hidden" id="back-button-curso" onclick="showContent('cursos')">↩</a>
+                <div class="carousel-dots" id="carousel-dots-curso">
+                    <span class="carousel-dot active" onclick="goToSlideCurso(0)"></span>
+                    <span class="carousel-dot" onclick="goToSlideCurso(1)"></span>
+                    <span class="carousel-dot" onclick="goToSlideCurso(2)"></span>
+                    <span class="carousel-dot" onclick="goToSlideCurso(3)"></span>
+                </div>
+            </div>
+        </div>
+        <div id="sobre-nosotros-content" class="content">
+            <h1>Sobre Nosotros</h1>
+            <p>🌍 ¿Por qué elegir este curso?</p>
+            <div class="carousel">
+                <div class="carousel-inner" id="carousel-inner-sobre">
+                    <div class="module">
+                        <h3>Claro y Accesible</h3>
+                        <p>Explicaciones sencillas, sin tecnicismos innecesarios.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Aplicación Práctica</h3>
+                        <p>Ejemplos reales, apps que ya usas.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Habilidades del Futuro</h3>
+                        <p>Prepárate para los desafíos de la economía digital global.</p>
+                    </div>
+                    <div class="module">
+                        <h3>Enfoque Transformador</h3>
+                        <p>Rompe mitos, entiende el dinero digital y forma parte de la generación que lidera el cambio.</p>
+                    </div>
+                </div>
+                <button class="carousel-button prev" id="prev-button-sobre" onclick="moveSlideSobre(-1)">&lt;</button>
+                <button class="carousel-button next" id="next-button-sobre" onclick="moveSlideSobre(1)">&gt;</button>
+                <a href="#contacto" class="carousel-button back hidden" id="back-button-sobre" onclick="showContent('contacto')">&gt;</a>
+                <div class="carousel-dots" id="carousel-dots-sobre">
+                    <span class="carousel-dot active" onclick="goToSlideSobre(0)"></span>
+                    <span class="carousel-dot" onclick="goToSlideSobre(1)"></span>
+                    <span class="carousel-dot" onclick="goToSlideSobre(2)"></span>
+                    <span class="carousel-dot" onclick="goToSlideSobre(3)"></span>
+                </div>
+            </div>
+        </div>
+        <div id="contacto-content" class="content">
+            <h1>Contacto</h1>
+            <p>💡 El mundo ya cambió. ¿Y tú?</p>
+            <p>Los sistemas financieros están evolucionando. Si no entiendes cómo funcionan, corres el riesgo de quedarte atrás. This curso es tu oportunidad para dominar el lenguaje del dinero digital, tomar decisiones informadas y abrir puertas en el mundo profesional.</p>
+            <p>Por solo 3,500 MXN, accede a una experiencia educativa elegante, emocionante y relevante. Con cupo limitado, es tu momento para tomar ventaja y liderar en la era financiera digital.</p>
+            <p>🚀 ¡Inscríbete hoy y prepárate para el dinero del mañana!</p>
+            <p>Contáctanos en <a href="mailto:info@cursocripto.com.mx" class="email-link">info@cursocripto.com.mx</a>.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 CursoCripto. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Mostrar contenido dinámico en el contenedor
+        function showContent(sectionId) {
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            const selectedContent = document.getElementById(`${sectionId}-content`);
+            selectedContent.classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}` || (sectionId === 'curso-101' && link.getAttribute('href') === '#cursos')) {
+                    link.classList.add('active');
+                }
+            });
+            document.querySelector('.nav-links').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'instant' }); // Desplazar al inicio sin animación
+            if (sectionId === 'curso-101') {
+                currentSlideCurso = 0; // Reiniciar carrusel de Curso 101
+                updateCarouselCurso();
+            } else if (sectionId === 'sobre-nosotros') {
+                currentSlideSobre = 0; // Reiniciar carrusel de Sobre Nosotros
+                updateCarouselSobre();
+            }
+        }
+
+        // Alternar menú de hamburguesa
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Carrusel para Curso 101
+        let currentSlideCurso = 0;
+        const slidesCurso = document.querySelectorAll('#carousel-inner-curso .module');
+        const totalSlidesCurso = slidesCurso.length;
+        const carouselInnerCurso = document.getElementById('carousel-inner-curso');
+        const dotsCurso = document.querySelectorAll('#carousel-dots-curso .carousel-dot');
+        const prevButtonCurso = document.getElementById('prev-button-curso');
+        const nextButtonCurso = document.getElementById('next-button-curso');
+        const backButtonCurso = document.getElementById('back-button-curso');
+
+        function updateCarouselCurso() {
+            carouselInnerCurso.style.transform = `translateX(-${currentSlideCurso * 100}%)`;
+            dotsCurso.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideCurso);
+            });
+            prevButtonCurso.classList.toggle('hidden', currentSlideCurso === 0);
+            nextButtonCurso.classList.toggle('hidden', currentSlideCurso === totalSlidesCurso - 1);
+            backButtonCurso.classList.toggle('hidden', currentSlideCurso !== totalSlidesCurso - 1);
+        }
+
+        function moveSlideCurso(direction) {
+            currentSlideCurso = (currentSlideCurso + direction + totalSlidesCurso) % totalSlidesCurso;
+            updateCarouselCurso();
+        }
+
+        function goToSlideCurso(index) {
+            currentSlideCurso = index;
+            updateCarouselCurso();
+        }
+
+        // Carrusel para Sobre Nosotros
+        let currentSlideSobre = 0;
+        const slidesSobre = document.querySelectorAll('#carousel-inner-sobre .module');
+        const totalSlidesSobre = slidesSobre.length;
+        const carouselInnerSobre = document.getElementById('carousel-inner-sobre');
+        const dotsSobre = document.querySelectorAll('#carousel-dots-sobre .carousel-dot');
+        const prevButtonSobre = document.getElementById('prev-button-sobre');
+        const nextButtonSobre = document.getElementById('next-button-sobre');
+        const backButtonSobre = document.getElementById('back-button-sobre');
+
+        function updateCarouselSobre() {
+            carouselInnerSobre.style.transform = `translateX(-${currentSlideSobre * 100}%)`;
+            dotsSobre.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideSobre);
+            });
+            prevButtonSobre.classList.toggle('hidden', currentSlideSobre === 0);
+            nextButtonSobre.classList.toggle('hidden', currentSlideSobre === totalSlidesSobre - 1);
+            backButtonSobre.classList.toggle('hidden', currentSlideSobre !== totalSlidesSobre - 1);
+        }
+
+        function moveSlideSobre(direction) {
+            currentSlideSobre = (currentSlideSobre + direction + totalSlidesSobre) % totalSlidesSobre;
+            updateCarouselSobre();
+        }
+
+        function goToSlideSobre(index) {
+            currentSlideSobre = index;
+            updateCarouselSobre();
+        }
+    </script>
+</body>
+</html>
