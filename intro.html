@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Cripto - Bienvenida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            background: black;
+            animation: changeBackground 12s forwards;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .message-1 {
+            color: white;
+            animation: slideFade1 6s forwards, glow 2s ease-in-out infinite alternate;
+        }
+
+        .message-2 {
+            color: #00ccff;
+            top: 50px;
+            animation: slideFade2 6s 6s forwards, glow 2s ease-in-out infinite alternate;
+        }
+
+        .crypto-icon {
+            width: 50px;
+            position: absolute;
+            left: 50%;
+            top: 150px;
+            transform: translateX(-50%);
+            opacity: 0;
+            filter: drop-shadow(0 0 10px #00ccff);
+            animation: slideFade2 6s 6s forwards, glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes slideFade1 {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+
+        @keyframes slideFade2 {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff; filter: drop-shadow(0 0 10px #00ccff); }
+            100% { text-shadow: 0 0 15px #00ccff, 0 0 25px #00ccff, 0 0 40px #00ccff; filter: drop-shadow(0 0 15px #00ccff); }
+        }
+
+        @keyframes changeBackground {
+            0% { background: black; }
+            100% { background: #1A2A44; }
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .message {
+                font-size: clamp(1.4rem, 4vw, 2.2rem);
+                padding: 0 15px;
+            }
+            .message-2 {
+                top: 30px;
+            }
+            .crypto-icon {
+                width: 40px;
+                top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="message message-1">¿Conoces las nuevas formas de dinero?</div>
+        <div class="message message-2">¿Sabes qué son las criptomonedas?</div>
+        <svg class="crypto-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#00ccff" stroke-width="8"/>
+            <text x="50" y="60" font-size="40" fill="#00ccff" text-anchor="middle" font-family="Arial">₿</text>
+        </svg>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ccff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                move: { enable: true, speed: 1, direction: "none", random: true }
+            },
+            interactivity: {
+                events: { onhover: { enable: false }, onclick: { enable: false } }
+            }
+        });
+    </script>
+</body>
+</html>
