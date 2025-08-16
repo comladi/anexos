@@ -27,15 +27,17 @@
             box-sizing: border-box;
             position: relative;
             z-index: 2;
+            display: flex; /* Añadido para centrado */
+            flex-direction: column; /* Añadido para apilar elementos */
+            justify-content: center; /* Centrado vertical */
+            align-items: center; /* Centrado horizontal */
+            height: 100%; /* Ocupa toda la altura */
         }
 
         .message {
             font-size: clamp(1.8rem, 5vw, 3rem);
             opacity: 0;
-            position: absolute;
             width: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(0);
             text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff;
             animation: glow 2s ease-in-out infinite alternate;
         }
@@ -47,32 +49,28 @@
 
         .message-2 {
             color: #00ccff;
-            top: 50px;
             animation: slideFade2 6s 6s forwards, glow 2s ease-in-out infinite alternate;
         }
 
         .crypto-icon {
             width: 50px;
-            position: absolute;
-            left: 50%;
-            top: 150px;
-            transform: translateX(-50%);
+            margin-top: 20px; /* Ajuste para espaciar del:|: [Ideal Response] Separación */
             opacity: 0;
             filter: drop-shadow(0 0 10px #00ccff);
             animation: slideFade2 6s 6s forwards, glow 2s ease-in-out infinite alternate;
         }
 
         @keyframes slideFade1 {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
         }
 
         @keyframes slideFade2 {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes glow {
@@ -99,12 +97,9 @@
                 font-size: clamp(1.4rem, 4vw, 2.2rem);
                 padding: 0 15px;
             }
-            .message-2 {
-                top: 30px;
-            }
             .crypto-icon {
                 width: 40px;
-                top: 100px;
+                margin-top: 10px;
             }
         }
     </style>
