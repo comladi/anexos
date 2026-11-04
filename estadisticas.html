@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cómo interpretar las estadísticas del activo?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0b0e14;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    header {
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #21262d;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .btn-copy {
+      background-color: #1f242c;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .btn-copy:hover {
+      background-color: #30363d;
+      color: #ffffff;
+    }
+    .stat-item {
+      margin-bottom: 28px;
+    }
+    .stat-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .stat-desc {
+      font-size: 15px;
+      color: #9da7b3;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>¿Cómo interpretar las estadísticas del activo?</h1>
+      <button class="btn-copy" id="copyBtn" onclick="copyContent()">
+        <span>Copiar texto</span>
+      </button>
+    </header>
+
+    <main>
+      <article class="stat-item">
+        <h2 class="stat-title">Ranking</h2>
+        <p class="stat-desc">Qué tan grande es este activo comparado con el resto del mercado cripto. Cuanto más bajo el número, más relevante es.</p>
+      </article>
+
+      <article class="stat-item">
+        <h2 class="stat-title">Market cap</h2>
+        <p class="stat-desc">El tamaño total de este activo en el mercado: cuánto valdría si juntaras todas las unidades que existen al precio de hoy.</p>
+      </article>
+
+      <article class="stat-item">
+        <h2 class="stat-title">Volumen (24 h)</h2>
+        <p class="stat-desc">Cuánto dinero se ha movido comprando y vendiendo este activo en el último día.</p>
+      </article>
+
+      <article class="stat-item">
+        <h2 class="stat-title">Oferta circulante</h2>
+        <p class="stat-desc">Cuántas unidades de este activo existen y están en manos de personas o proyectos en este momento.</p>
+      </article>
+
+      <article class="stat-item">
+        <h2 class="stat-title">Mínimo y máximo del día (24 h)</h2>
+        <p class="stat-desc">El rango de precio en el que se ha movido este activo hoy: el punto más alto y el más bajo que tocó.</p>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function copyContent() {
+      const text = `¿Cómo interpretar las estadísticas del activo?\n\n` +
+        `Ranking\nQué tan grande es este activo comparado con el resto del mercado cripto. Cuanto más bajo el número, más relevante es.\n\n` +
+        `Market cap\nEl tamaño total de este activo en el mercado: cuánto valdría si juntaras todas las unidades que existen al precio de hoy.\n\n` +
+        `Volumen (24 h)\nCuánto dinero se ha movido comprando y vendiendo este activo en el último día.\n\n` +
+        `Oferta circulante\nCuántas unidades de este activo existen y están en manos de personas o proyectos en este momento.\n\n` +
+        `Mínimo y máximo del día (24 h)\nEl rango de precio en el que se ha movido este activo hoy: el punto más alto y el más bajo que tocó.`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.innerHTML = '<span>¡Copiado!</span>';
+        setTimeout(() => {
+          btn.innerHTML = '<span>Copiar texto</span>';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

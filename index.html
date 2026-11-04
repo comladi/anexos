@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal</title>
+    <meta name="description" content="Acceso directo al ecosistema de módulos financieros." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background-color: #07090e;
+        color: #f1f5f9;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+      .container {
+        max-width: 680px;
+        width: 100%;
+      }
+      .content-paragraph {
+        font-size: 1.125rem;
+        font-weight: 300;
+        line-height: 1.7;
+        color: #cbd5e1;
+        margin-bottom: 2.5rem;
+        letter-spacing: 0.01em;
+        text-wrap: balance;
+      }
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 0.875rem;
+        list-style: none;
+      }
+      .menu-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        background: #0e1320;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .menu-link:hover {
+        background: #141b2d;
+        border-color: rgba(245, 158, 11, 0.4);
+        transform: translateY(-2px);
+      }
+      .item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .item-name {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #ffffff;
+        transition: color 0.2s;
+      }
+      .menu-link:hover .item-name {
+        color: #fcd34d;
+      }
+      .item-file {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .arrow {
+        font-size: 1rem;
+        color: #94a3b8;
+        transition: transform 0.2s, color 0.2s;
+      }
+      .menu-link:hover .arrow {
+        color: #f59e0b;
+        transform: translate(2px, -2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <main class="container">
+        <!-- Único párrafo de contenido (< 200 palabras) -->
+        <p class="content-paragraph">
+          Centralice el control de sus activos y acelere la toma de decisiones críticas con un ecosistema financiero concebido para blindar cada transacción y maximizar el rendimiento institucional. Desde el análisis estratégico de Bitcoin y el despliegue de ofertas públicas iniciales, hasta pasarelas de pago de alta frecuencia, métricas en tiempo real y arquitectura modular: cada entorno ha sido calibrado para transformar la liquidez en ventaja competitiva sostenida. Seleccione un módulo a continuación para acceder de inmediato.
+        </p>
+
+        <!-- Menú que lleva a los archivos HTML alojados en el mismo nivel -->
+        <nav aria-label="Menú principal">
+          <ul class="menu-grid">
+            <li>
+              <a href="bitcoin.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">Bitcoin</span>
+                  <span class="item-file">bitcoin.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="componentes.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">Componentes</span>
+                  <span class="item-file">componentes.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="estadisticas.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">Estadísticas</span>
+                  <span class="item-file">estadisticas.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="ipo.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">IPO</span>
+                  <span class="item-file">ipo.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="pagos.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">Pagos</span>
+                  <span class="item-file">pagos.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="plvss.html" class="menu-link">
+                <div class="item-info">
+                  <span class="item-name">PLVSS</span>
+                  <span class="item-file">plvss.html</span>
+                </div>
+                <span class="arrow">↗</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

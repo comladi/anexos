@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proveedor de Liquidez vs Staking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+      .font-size-normal .text-aspecto { font-size: 0.95rem; }
+      .font-size-normal .text-content { font-size: 0.9rem; }
+      .font-size-large .text-aspecto { font-size: 1.15rem; }
+      .font-size-large .text-content { font-size: 1.05rem; }
+      .font-size-xlarge .text-aspecto { font-size: 1.35rem; }
+      .font-size-xlarge .text-content { font-size: 1.25rem; }
+    </style>
+  </head>
+  <body class="bg-slate-100 text-slate-900 py-4 sm:py-8 md:py-12 px-3 sm:px-6 lg:px-8 min-h-screen flex flex-col items-center justify-start">
+    <main class="w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 font-size-normal" id="content-container">
+      <section class="bg-white rounded-2xl shadow-sm sm:shadow-md border border-slate-200 p-4 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6">
+        
+        <!-- Encabezado y controles -->
+        <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 pb-4 border-b border-slate-200">
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight text-center sm:text-left">
+            Proveedor de Liquidez (PL) vs Staking
+          </h1>
+
+          <div class="flex items-center justify-center sm:justify-end gap-2 flex-wrap select-none">
+            <!-- Control de Tamaño de Texto -->
+            <button
+              id="btn-text-size"
+              onclick="toggleTextSize()"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs sm:text-sm font-medium text-slate-700 transition-colors shadow-xs"
+              title="Cambiar tamaño de texto"
+            >
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+              </svg>
+              <span id="label-text-size" class="font-semibold">A (Normal)</span>
+            </button>
+
+            <!-- Selector de Vista: Auto / Tabla / Tarjetas -->
+            <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs sm:text-sm font-medium text-slate-600">
+              <button
+                id="btn-view-auto"
+                onclick="setViewMode('auto')"
+                type="button"
+                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors bg-white text-slate-900 shadow-xs font-semibold"
+              >
+                Auto
+              </button>
+              <button
+                id="btn-view-table"
+                onclick="setViewMode('table')"
+                type="button"
+                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors hover:text-slate-900"
+              >
+                Tabla
+              </button>
+              <button
+                id="btn-view-cards"
+                onclick="setViewMode('cards')"
+                type="button"
+                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors hover:text-slate-900"
+              >
+                Tarjetas
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Vista Tabla -->
+        <div id="table-wrapper" class="w-full overflow-x-auto rounded-xl shadow-md border border-slate-300 bg-white">
+          <table class="w-full text-left border-collapse min-w-[640px]">
+            <thead>
+              <tr class="bg-[#1c2e44] text-white">
+                <th scope="col" class="py-4 px-5 text-center font-bold tracking-wide border-r border-slate-400/40 w-[24%] text-aspecto">
+                  Aspecto
+                </th>
+                <th scope="col" class="py-4 px-6 text-center font-bold tracking-wide border-r border-slate-400/40 w-[38%] text-aspecto">
+                  Proveedor de Liquidez (PL)
+                </th>
+                <th scope="col" class="py-4 px-6 text-center font-bold tracking-wide w-[38%] text-aspecto">
+                  Staking
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-300 text-slate-800 leading-relaxed">
+              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
+                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
+                  Mecánica
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                  Aportar activos a un pool de liquidez para facilitar intercambios
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                  Bloquear tokens para asegurar una red o recibir recompensas
+                </td>
+              </tr>
+              <tr class="bg-slate-50/70 hover:bg-sky-50/50 transition-colors">
+                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
+                  Recompensas
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                  Comisiones de transacción del pool
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                  Recompensas en tokens adicionales
+                </td>
+              </tr>
+              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
+                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
+                  Riesgo principal
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                  Impermanent loss, desbalance en el pool
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                  Riesgo de bloqueo de tokens, posibles fallos en la red
+                </td>
+              </tr>
+              <tr class="bg-slate-50/70 hover:bg-sky-50/50 transition-colors">
+                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
+                  Liquidez
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                  Los LPs pueden retirar su liquidez en cualquier momento
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                  Los tokens bloqueados en staking no pueden retirarse fácilmente
+                </td>
+              </tr>
+              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
+                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
+                  Relación
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                  Los tokens LP pueden ser utilizados para staking en algunos protocolos
+                </td>
+                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                  Algunos protocolos permiten staking de tokens LP para mayores recompensas
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Vista Tarjetas -->
+        <div id="cards-wrapper" class="flex flex-col gap-5 w-full">
+          <!-- Mecánica -->
+          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
+              Mecánica
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Proveedor de Liquidez (PL)
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Aportar activos a un pool de liquidez para facilitar intercambios
+                </p>
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Staking
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Bloquear tokens para asegurar una red o recibir recompensas
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Recompensas -->
+          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
+              Recompensas
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Proveedor de Liquidez (PL)
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Comisiones de transacción del pool
+                </p>
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Staking
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Recompensas en tokens adicionales
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Riesgo principal -->
+          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
+              Riesgo principal
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Proveedor de Liquidez (PL)
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Impermanent loss, desbalance en el pool
+                </p>
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Staking
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Riesgo de bloqueo de tokens, posibles fallos en la red
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Liquidez -->
+          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
+              Liquidez
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Proveedor de Liquidez (PL)
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Los LPs pueden retirar su liquidez en cualquier momento
+                </p>
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Staking
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Los tokens bloqueados en staking no pueden retirarse fácilmente
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Relación -->
+          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
+              Relación
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Proveedor de Liquidez (PL)
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Los tokens LP pueden ser utilizados para staking en algunos protocolos
+                </p>
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
+                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
+                  Staking
+                </span>
+                <p class="text-slate-800 leading-relaxed text-content">
+                  Algunos protocolos permiten staking de tokens LP para mayores recompensas
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p id="table-hint" class="text-[11px] sm:text-xs text-slate-400 text-center hidden">
+          (Desliza horizontalmente la tabla para ver todas las columnas)
+        </p>
+
+      </section>
+    </main>
+
+    <script>
+      let currentMode = 'auto';
+      let textSizeIndex = 0;
+      const textSizes = ['normal', 'large', 'xlarge'];
+      const textSizeLabels = ['A (Normal)', 'A+ (Grande)', 'A++ (Muy Grande)'];
+
+      const tableWrapper = document.getElementById('table-wrapper');
+      const cardsWrapper = document.getElementById('cards-wrapper');
+      const tableHint = document.getElementById('table-hint');
+      const contentContainer = document.getElementById('content-container');
+      const labelTextSize = document.getElementById('label-text-size');
+
+      const btnAuto = document.getElementById('btn-view-auto');
+      const btnTable = document.getElementById('btn-view-table');
+      const btnCards = document.getElementById('btn-view-cards');
+
+      function updateLayout() {
+        const isMobile = window.innerWidth < 768;
+
+        btnAuto.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'auto' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
+        btnTable.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'table' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
+        btnCards.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'cards' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
+
+        if (currentMode === 'auto') {
+          if (isMobile) {
+            tableWrapper.classList.add('hidden');
+            cardsWrapper.classList.remove('hidden');
+            tableHint.classList.add('hidden');
+          } else {
+            tableWrapper.classList.remove('hidden');
+            cardsWrapper.classList.add('hidden');
+            tableHint.classList.add('hidden');
+          }
+        } else if (currentMode === 'table') {
+          tableWrapper.classList.remove('hidden');
+          cardsWrapper.classList.add('hidden');
+          if (isMobile) {
+            tableHint.classList.remove('hidden');
+          } else {
+            tableHint.classList.add('hidden');
+          }
+        } else if (currentMode === 'cards') {
+          tableWrapper.classList.add('hidden');
+          cardsWrapper.classList.remove('hidden');
+          tableHint.classList.add('hidden');
+        }
+      }
+
+      function setViewMode(mode) {
+        currentMode = mode;
+        updateLayout();
+      }
+
+      function toggleTextSize() {
+        textSizeIndex = (textSizeIndex + 1) % textSizes.length;
+        contentContainer.className = "w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 font-size-" + textSizes[textSizeIndex];
+        labelTextSize.textContent = textSizeLabels[textSizeIndex];
+      }
+
+      window.addEventListener('resize', () => {
+        if (currentMode === 'auto') {
+          updateLayout();
+        }
+      });
+
+      updateLayout();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Sistemas de Pago</title>
+  <meta name="description" content="Análisis de las características, ventajas y desventajas de los sistemas de liquidación financiera">
+  <meta property="og:title" content="Tipos de Sistemas de Pago">
+  <meta property="og:description" content="Análisis de las características, ventajas y desventajas de los sistemas de liquidación financiera">
+  <meta property="og:type" content="website">
+  <style>
+    /* Variables de diseño y accesibilidad (WCAG AA/AAA) */
+    :root {
+      --primary: #0f172a;
+      --primary-light: #1e293b;
+      --brand: #1a3c6d;
+      --brand-hover: #132d52;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --accent-green-bg: #ecfdf5;
+      --accent-green-border: #a7f3d0;
+      --accent-green-text: #065f46;
+      --accent-green-dot: #059669;
+      --accent-red-bg: #fff1f2;
+      --accent-red-border: #fecdd3;
+      --accent-red-text: #9f1239;
+      --accent-red-dot: #e11d48;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    /* Enlace accesible para lectores de pantalla */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      background: var(--brand);
+      color: #ffffff;
+      padding: 10px 18px;
+      z-index: 1000;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 16px;
+      outline: 3px solid #60a5fa;
+    }
+
+    /* Contenedor principal */
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    /* Encabezado */
+    header {
+      text-align: center;
+      padding: 44px 24px 32px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .badge-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 16px;
+    }
+
+    .badge-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: none;
+      stroke: var(--brand);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--brand);
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Barra de herramientas / controles accesibles */
+    .toolbar {
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .view-toggles {
+      display: inline-flex;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: var(--radius-md);
+      gap: 4px;
+    }
+
+    .btn-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+      font-family: inherit;
+    }
+
+    .btn-toggle.active {
+      background: #ffffff;
+      color: var(--brand);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .btn-toggle:focus-visible,
+    .btn-action:focus-visible,
+    .quick-link:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-main);
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-action:hover {
+      background: #f8fafc;
+    }
+
+    /* Navegación rápida */
+    .quick-nav {
+      background: #f8fafc;
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      font-size: 0.84rem;
+    }
+
+    .quick-nav span {
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .quick-link {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--text-main);
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .quick-link:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+
+    /* Contenido principal */
+    main {
+      padding: 28px 24px 36px 24px;
+    }
+
+    /* Vista de Tabla */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    caption {
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      display: none;
+    }
+
+    th {
+      background-color: var(--brand);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 16px 18px;
+      vertical-align: middle;
+    }
+
+    th.th-ventajas {
+      background-color: #14532d;
+    }
+
+    th.th-desventajas {
+      background-color: #881337;
+    }
+
+    td {
+      padding: 20px 18px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .system-title-cell {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--brand);
+      min-width: 220px;
+    }
+
+    .desc-cell {
+      min-width: 260px;
+      color: #334155;
+    }
+
+    .ventajas-cell {
+      background-color: rgba(236, 253, 245, 0.45);
+      min-width: 260px;
+    }
+
+    .desventajas-cell {
+      background-color: rgba(255, 241, 242, 0.45);
+      min-width: 260px;
+    }
+
+    /* Listas dentro de celdas y tarjetas */
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.55;
+    }
+
+    .ventajas-cell li::before,
+    .card-ventajas li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-green-dot);
+    }
+
+    .desventajas-cell li::before,
+    .card-desventajas li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-red-dot);
+    }
+
+    li strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Vista de Tarjetas (ideal para celulares y tabletas) */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .system-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 16px 20px;
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .card-header h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .card-body {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card-section-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 0.98rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .card-columns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .card-columns {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card-box {
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+    }
+
+    .card-ventajas {
+      background: var(--accent-green-bg);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .card-desventajas {
+      background: var(--accent-red-bg);
+      border: 1px solid var(--accent-red-border);
+    }
+
+    .card-box-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-weight: 800;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-ventajas .card-box-header {
+      color: var(--accent-green-text);
+    }
+
+    .card-desventajas .card-box-header {
+      color: var(--accent-red-text);
+    }
+
+    /* Pie de página */
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: var(--brand);
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    footer p {
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* Adaptabilidad Responsiva para Tabletas y Celulares */
+    @media (max-width: 900px) {
+      body {
+        padding: 0;
+      }
+      .app-container {
+        border-radius: 0;
+        border: none;
+      }
+      header {
+        padding: 28px 18px 24px 18px;
+      }
+      header h1 {
+        font-size: 1.7rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      main {
+        padding: 18px 14px 26px 14px;
+      }
+    }
+
+    /* Reglas para Impresión */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .app-container {
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .skip-link, .toolbar, .quick-nav {
+        display: none !important;
+      }
+      table, .system-card {
+        page-break-inside: avoid;
+      }
+      header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      th {
+        background-color: #1a3c6d !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Enlace accesible de salto -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <div class="app-container">
+    <!-- Encabezado con contenido original intacto -->
+    <header>
+      <div class="badge-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M14 10v11M4 10l8-7 8 7"/></svg>
+      </div>
+      <h1>Tipos de Sistemas de Pago</h1>
+      <p>Análisis de las características, ventajas y desventajas de los sistemas de liquidación financiera</p>
+    </header>
+
+    <!-- Barra de accesibilidad y opciones de visualización -->
+    <nav class="toolbar" aria-label="Controles de visualización">
+      <div class="view-toggles" role="radiogroup" aria-label="Cambiar modo de vista">
+        <button type="button" id="btn-view-cards" class="btn-toggle active" role="radio" aria-checked="true" onclick="setView('cards')">
+          <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Vista Tarjetas (Recomendado móvil)
+        </button>
+        <button type="button" id="btn-view-table" class="btn-toggle" role="radio" aria-checked="false" onclick="setView('table')">
+          <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          Vista Tabla
+        </button>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-action" onclick="toggleFontSize()" title="Cambiar tamaño de fuente" aria-label="Cambiar tamaño de fuente">
+          <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+          <span id="font-btn-text">Tamaño texto</span>
+        </button>
+        <button type="button" class="btn-action" onclick="window.print()" title="Imprimir documento" aria-label="Imprimir documento">
+          <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+          Imprimir
+        </button>
+      </div>
+    </nav>
+
+    <!-- Accesos rápidos para dispositivos táctiles y lectores de pantalla -->
+    <div class="quick-nav" aria-label="Navegación rápida de contenido">
+      <span>Ir a:</span>
+      <a href="#sistema-rtgs" class="quick-link">RTGS</a>
+      <a href="#sistema-dns" class="quick-link">DNS</a>
+      <a href="#sistema-hibridos" class="quick-link">Híbridos</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <main id="main-content">
+      <!-- 1. VISTA DE TARJETAS (Visible por defecto en móviles / configurable) -->
+      <div id="cards-container" class="cards-wrapper" role="region" aria-label="Contenido en tarjetas responsivas">
+        <!-- Tarjeta 1: RTGS -->
+        <article id="sistema-rtgs" class="system-card" aria-labelledby="card-title-rtgs">
+          <div class="card-header">
+            <div class="card-tag">Tipo de Sistema</div>
+            <h2 id="card-title-rtgs">Sistemas de Liquidación Bruta en Tiempo Real (RTGS)</h2>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-section-label">Descripción</div>
+              <p class="card-desc">Intenta liquidar los pagos uno por uno, tan pronto como los instruyen los participantes. Si un pago no se puede liquidar (fondos insuficientes u otras razones), es rechazado o queda pendiente. No liquida pagos parcialmente. Liquida por el importe total del mismo.</p>
+            </div>
+            <div class="card-columns">
+              <div class="card-box card-ventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  Ventajas
+                </div>
+                <ul>
+                  <li><strong>Oportunidad:</strong> Si el participante que emite el pago tiene recursos, éste se liquida de inmediato.</li>
+                  <li><strong>Extinción de obligaciones:</strong> Facilita que los participantes puedan administrar sus riesgos.</li>
+                  <li><strong>Seguridad:</strong> No acumula una gran cantidad de pagos pendientes para ver si es posible liquidarlos todos juntos, con lo cual se reduce el riesgo de incumplimientos en caso de cierre de mercados. Estas ventajas son especialmente claras para pagos de alto valor.</li>
+                </ul>
+              </div>
+              <div class="card-box card-desventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  Desventajas
+                </div>
+                <ul>
+                  <li><strong>Gran demanda de liquidez:</strong> El participante emisor debe contar con cada peso que quiera pagar (los pagos enviados no se compensan con pagos por recibir).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 2: DNS -->
+        <article id="sistema-dns" class="system-card" aria-labelledby="card-title-dns">
+          <div class="card-header">
+            <div class="card-tag">Tipo de Sistema</div>
+            <h2 id="card-title-dns">Sistemas de Liquidación Neta Diferida (DNS)</h2>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-section-label">Descripción</div>
+              <p class="card-desc">Los pagos se acumulan y liquidan al final de periodos preestablecidos, por ejemplo, al finalizar el día de operación, con un proceso de compensación multilateral de las obligaciones de los participantes. La liquidación solo es final cuando todos los participantes han cubierto todas sus obligaciones.</p>
+            </div>
+            <div class="card-columns">
+              <div class="card-box card-ventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  Ventajas
+                </div>
+                <ul>
+                  <li><strong>Reducción de liquidez:</strong> El proceso de compensación reduce la liquidez que necesitan los participantes.</li>
+                </ul>
+              </div>
+              <div class="card-box card-desventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  Desventajas
+                </div>
+                <ul>
+                  <li><strong>Riesgo de incumplimiento:</strong> Si un participante no puede cubrir completamente sus obligaciones, no se liquidarán diversas operaciones, lo que puede generar incumplimientos en cadena.</li>
+                  <li><strong>Acumulación de riesgo:</strong> Los problemas no se hacen evidentes hasta después del cierre de los mercados financieros.</li>
+                  <li><strong>Demora en liquidación:</strong> El tiempo entre la instrucción de un pago y la liquidación final es largo. La mayoría de los sistemas de bajo valor se liquidan de esta forma.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 3: Híbridos -->
+        <article id="sistema-hibridos" class="system-card" aria-labelledby="card-title-hibridos">
+          <div class="card-header">
+            <div class="card-tag">Tipo de Sistema</div>
+            <h2 id="card-title-hibridos">Sistemas Híbridos</h2>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-section-label">Descripción</div>
+              <p class="card-desc">Mezclan características como el liquidar frecuentemente un conjunto de pagos que se pueden compensar o cubrir con la liquidez disponible. Incluyen algoritmos que compensan operaciones para aprovechar mejor la liquidez y dejan pendientes los pagos que no pueden liquidar para intentarlo cuando reciben nuevos pagos. Combinan la seguridad y oportunidad de los RTGS con la eficiencia en el uso de liquidez de los DNS.</p>
+            </div>
+            <div class="card-columns">
+              <div class="card-box card-ventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  Ventajas
+                </div>
+                <ul>
+                  <li><strong>Seguridad y oportunidad:</strong> Efectúan la liquidación de manera más segura y oportuna, optimizando el uso de la liquidez.</li>
+                </ul>
+              </div>
+              <div class="card-box card-desventajas">
+                <div class="card-box-header">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  Desventajas
+                </div>
+                <ul>
+                  <li><strong>Complejidad:</strong> Son más complejos y, por tanto, difíciles de diseñar y mantener.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 2. VISTA DE TABLA (Semántica, accesible y con scroll horizontal controlado) -->
+      <div id="table-container" class="table-wrapper" style="display: none;" role="region" aria-label="Tabla comparativa">
+        <table>
+          <caption>Análisis comparativo de sistemas de liquidación financiera</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tipo de Sistema</th>
+              <th scope="col">Descripción</th>
+              <th scope="col" class="th-ventajas">Ventajas</th>
+              <th scope="col" class="th-desventajas">Desventajas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="system-title-cell">Sistemas de Liquidación Bruta en Tiempo Real (RTGS)</th>
+              <td class="desc-cell">Intenta liquidar los pagos uno por uno, tan pronto como los instruyen los participantes. Si un pago no se puede liquidar (fondos insuficientes u otras razones), es rechazado o queda pendiente. No liquida pagos parcialmente. Liquida por el importe total del mismo.</td>
+              <td class="ventajas-cell">
+                <ul>
+                  <li><strong>Oportunidad:</strong> Si el participante que emite el pago tiene recursos, éste se liquida de inmediato.</li>
+                  <li><strong>Extinción de obligaciones:</strong> Facilita que los participantes puedan administrar sus riesgos.</li>
+                  <li><strong>Seguridad:</strong> No acumula una gran cantidad de pagos pendientes para ver si es posible liquidarlos todos juntos, con lo cual se reduce el riesgo de incumplimientos en caso de cierre de mercados. Estas ventajas son especialmente claras para pagos de alto valor.</li>
+                </ul>
+              </td>
+              <td class="desventajas-cell">
+                <ul>
+                  <li><strong>Gran demanda de liquidez:</strong> El participante emisor debe contar con cada peso que quiera pagar (los pagos enviados no se compensan con pagos por recibir).</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="system-title-cell">Sistemas de Liquidación Neta Diferida (DNS)</th>
+              <td class="desc-cell">Los pagos se acumulan y liquidan al final de periodos preestablecidos, por ejemplo, al finalizar el día de operación, con un proceso de compensación multilateral de las obligaciones de los participantes. La liquidación solo es final cuando todos los participantes han cubierto todas sus obligaciones.</td>
+              <td class="ventajas-cell">
+                <ul>
+                  <li><strong>Reducción de liquidez:</strong> El proceso de compensación reduce la liquidez que necesitan los participantes.</li>
+                </ul>
+              </td>
+              <td class="desventajas-cell">
+                <ul>
+                  <li><strong>Riesgo de incumplimiento:</strong> Si un participante no puede cubrir completamente sus obligaciones, no se liquidarán diversas operaciones, lo que puede generar incumplimientos en cadena.</li>
+                  <li><strong>Acumulación de riesgo:</strong> Los problemas no se hacen evidentes hasta después del cierre de los mercados financieros.</li>
+                  <li><strong>Demora en liquidación:</strong> El tiempo entre la instrucción de un pago y la liquidación final es largo. La mayoría de los sistemas de bajo valor se liquidan de esta forma.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="system-title-cell">Sistemas Híbridos</th>
+              <td class="desc-cell">Mezclan características como el liquidar frecuentemente un conjunto de pagos que se pueden compensar o cubrir con la liquidez disponible. Incluyen algoritmos que compensan operaciones para aprovechar mejor la liquidez y dejan pendientes los pagos que no pueden liquidar para intentarlo cuando reciben nuevos pagos. Combinan la seguridad y oportunidad de los RTGS con la eficiencia en el uso de liquidez de los DNS.</td>
+              <td class="ventajas-cell">
+                <ul>
+                  <li><strong>Seguridad y oportunidad:</strong> Efectúan la liquidación de manera más segura y oportuna, optimizando el uso de la liquidez.</li>
+                </ul>
+              </td>
+              <td class="desventajas-cell">
+                <ul>
+                  <li><strong>Complejidad:</strong> Son más complejos y, por tanto, difíciles de diseñar y mantener.</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Pie de página original intacto -->
+    <footer>
+      <p>Elaborado para fines informativos | © 2025</p>
+    </footer>
+  </div>
+
+  <script>
+    // Controlador de vista: Tarjetas o Tabla
+    function setView(mode) {
+      const cardsContainer = document.getElementById('cards-container');
+      const tableContainer = document.getElementById('table-container');
+      const btnCards = document.getElementById('btn-view-cards');
+      const btnTable = document.getElementById('btn-view-table');
+
+      if (mode === 'table') {
+        cardsContainer.style.display = 'none';
+        tableContainer.style.display = 'block';
+        btnCards.classList.remove('active');
+        btnCards.setAttribute('aria-checked', 'false');
+        btnTable.classList.add('active');
+        btnTable.setAttribute('aria-checked', 'true');
+      } else {
+        cardsContainer.style.display = 'flex';
+        tableContainer.style.display = 'none';
+        btnTable.classList.remove('active');
+        btnTable.setAttribute('aria-checked', 'false');
+        btnCards.classList.add('active');
+        btnCards.setAttribute('aria-checked', 'true');
+      }
+    }
+
+    // Auto-detección inicial según pantalla
+    if (window.innerWidth >= 1024) {
+      setView('table');
+    } else {
+      setView('cards');
+    }
+
+    // Ajuste dinámico accesible de tamaño de texto
+    let isLargeFont = false;
+    function toggleFontSize() {
+      isLargeFont = !isLargeFont;
+      document.body.style.fontSize = isLargeFont ? '18px' : '16px';
+      document.getElementById('font-btn-text').innerText = isLargeFont ? 'Texto normal' : 'Texto grande';
+    }
+  </script>
+</body>
+</html>
