@@ -3,174 +3,204 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proveedor de Liquidez vs Staking</title>
+    <title>Proveedor de Liquidez (PL) vs Staking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
     <style>
       body {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       }
-      .font-size-normal .text-aspecto { font-size: 0.95rem; }
-      .font-size-normal .text-content { font-size: 0.9rem; }
-      .font-size-large .text-aspecto { font-size: 1.15rem; }
-      .font-size-large .text-content { font-size: 1.05rem; }
-      .font-size-xlarge .text-aspecto { font-size: 1.35rem; }
-      .font-size-xlarge .text-content { font-size: 1.25rem; }
     </style>
   </head>
-  <body class="bg-slate-100 text-slate-900 py-4 sm:py-8 md:py-12 px-3 sm:px-6 lg:px-8 min-h-screen flex flex-col items-center justify-start">
-    <main class="w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 font-size-normal" id="content-container">
-      <section class="bg-white rounded-2xl shadow-sm sm:shadow-md border border-slate-200 p-4 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6">
+  <body class="bg-gradient-to-br from-slate-100 via-sky-50/30 to-violet-50/30 text-slate-900 py-6 sm:py-10 md:py-14 px-3 sm:px-6 lg:px-8 min-h-screen flex flex-col items-center justify-start">
+    <main class="w-full max-w-5xl mx-auto flex flex-col gap-6">
+      
+      <!-- Contenedor Principal -->
+      <section class="bg-white rounded-2xl md:rounded-3xl shadow-xl shadow-slate-200/80 border border-slate-200/90 overflow-hidden">
         
-        <!-- Encabezado y controles -->
-        <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 pb-4 border-b border-slate-200">
+        <!-- Encabezado -->
+        <header class="px-5 py-6 sm:px-8 sm:py-7 border-b border-slate-100 bg-gradient-to-r from-white via-slate-50/50 to-white">
           <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight text-center sm:text-left">
             Proveedor de Liquidez (PL) vs Staking
           </h1>
-
-          <div class="flex items-center justify-center sm:justify-end gap-2 flex-wrap select-none">
-            <!-- Control de Tamaño de Texto -->
-            <button
-              id="btn-text-size"
-              onclick="toggleTextSize()"
-              type="button"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs sm:text-sm font-medium text-slate-700 transition-colors shadow-xs"
-              title="Cambiar tamaño de texto"
-            >
-              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
-              </svg>
-              <span id="label-text-size" class="font-semibold">A (Normal)</span>
-            </button>
-
-            <!-- Selector de Vista: Auto / Tabla / Tarjetas -->
-            <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs sm:text-sm font-medium text-slate-600">
-              <button
-                id="btn-view-auto"
-                onclick="setViewMode('auto')"
-                type="button"
-                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors bg-white text-slate-900 shadow-xs font-semibold"
-              >
-                Auto
-              </button>
-              <button
-                id="btn-view-table"
-                onclick="setViewMode('table')"
-                type="button"
-                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors hover:text-slate-900"
-              >
-                Tabla
-              </button>
-              <button
-                id="btn-view-cards"
-                onclick="setViewMode('cards')"
-                type="button"
-                class="px-2.5 sm:px-3 py-1.5 rounded-md transition-colors hover:text-slate-900"
-              >
-                Tarjetas
-              </button>
-            </div>
-          </div>
         </header>
 
-        <!-- Vista Tabla -->
-        <div id="table-wrapper" class="w-full overflow-x-auto rounded-xl shadow-md border border-slate-300 bg-white">
-          <table class="w-full text-left border-collapse min-w-[640px]">
+        <!-- VISTA PC Y TABLET: Tabla con distinción de color por columna -->
+        <div class="hidden md:block w-full overflow-hidden">
+          <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-[#1c2e44] text-white">
-                <th scope="col" class="py-4 px-5 text-center font-bold tracking-wide border-r border-slate-400/40 w-[24%] text-aspecto">
+              <tr>
+                <th scope="col" class="py-4.5 px-6 text-center font-bold tracking-wider uppercase text-xs text-slate-200 w-[24%] bg-slate-900 border-r border-slate-800">
                   Aspecto
                 </th>
-                <th scope="col" class="py-4 px-6 text-center font-bold tracking-wide border-r border-slate-400/40 w-[38%] text-aspecto">
-                  Proveedor de Liquidez (PL)
+                <th scope="col" class="py-4.5 px-6 font-bold text-sm tracking-wide w-[38%] bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-r border-cyan-500/40 shadow-inner">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-white shadow-xs"></span>
+                    <span>Proveedor de Liquidez (PL)</span>
+                  </div>
                 </th>
-                <th scope="col" class="py-4 px-6 text-center font-bold tracking-wide w-[38%] text-aspecto">
-                  Staking
+                <th scope="col" class="py-4.5 px-6 font-bold text-sm tracking-wide w-[38%] bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-inner">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-white shadow-xs"></span>
+                    <span>Staking</span>
+                  </div>
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-300 text-slate-800 leading-relaxed">
-              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
-                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
-                  Mecánica
+            <tbody class="divide-y divide-slate-200 text-slate-800">
+              
+              <!-- Mecánica -->
+              <tr class="transition-colors duration-150">
+                <td class="py-5 px-6 font-semibold text-slate-900 text-center align-middle border-r border-slate-200 bg-slate-50/70">
+                  <div class="flex items-center justify-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-blue-600 bg-blue-100/80">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                      </svg>
+                    </span>
+                    <span class="text-sm font-semibold">Mecánica</span>
+                  </div>
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                <td class="py-5 px-7 align-middle border-r border-cyan-200/60 leading-relaxed text-sm text-slate-800 bg-cyan-50/25 hover:bg-cyan-100/50 transition-colors">
                   Aportar activos a un pool de liquidez para facilitar intercambios
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                <td class="py-5 px-7 align-middle leading-relaxed text-sm text-slate-800 bg-violet-50/25 hover:bg-violet-100/50 transition-colors">
                   Bloquear tokens para asegurar una red o recibir recompensas
                 </td>
               </tr>
-              <tr class="bg-slate-50/70 hover:bg-sky-50/50 transition-colors">
-                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
-                  Recompensas
+
+              <!-- Recompensas -->
+              <tr class="transition-colors duration-150">
+                <td class="py-5 px-6 font-semibold text-slate-900 text-center align-middle border-r border-slate-200 bg-slate-100/60">
+                  <div class="flex items-center justify-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-600 bg-emerald-100/80">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </span>
+                    <span class="text-sm font-semibold">Recompensas</span>
+                  </div>
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                <td class="py-5 px-7 align-middle border-r border-cyan-200/60 leading-relaxed text-sm text-slate-800 bg-cyan-50/45 hover:bg-cyan-100/60 transition-colors">
                   Comisiones de transacción del pool
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                <td class="py-5 px-7 align-middle leading-relaxed text-sm text-slate-800 bg-violet-50/45 hover:bg-violet-100/60 transition-colors">
                   Recompensas en tokens adicionales
                 </td>
               </tr>
-              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
-                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
-                  Riesgo principal
+
+              <!-- Riesgo principal -->
+              <tr class="transition-colors duration-150">
+                <td class="py-5 px-6 font-semibold text-slate-900 text-center align-middle border-r border-slate-200 bg-slate-50/70">
+                  <div class="flex items-center justify-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-amber-600 bg-amber-100/80">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                      </svg>
+                    </span>
+                    <span class="text-sm font-semibold">Riesgo principal</span>
+                  </div>
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                <td class="py-5 px-7 align-middle border-r border-cyan-200/60 leading-relaxed text-sm text-slate-800 bg-cyan-50/25 hover:bg-cyan-100/50 transition-colors">
                   Impermanent loss, desbalance en el pool
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                <td class="py-5 px-7 align-middle leading-relaxed text-sm text-slate-800 bg-violet-50/25 hover:bg-violet-100/50 transition-colors">
                   Riesgo de bloqueo de tokens, posibles fallos en la red
                 </td>
               </tr>
-              <tr class="bg-slate-50/70 hover:bg-sky-50/50 transition-colors">
-                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
-                  Liquidez
+
+              <!-- Liquidez -->
+              <tr class="transition-colors duration-150">
+                <td class="py-5 px-6 font-semibold text-slate-900 text-center align-middle border-r border-slate-200 bg-slate-100/60">
+                  <div class="flex items-center justify-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-cyan-600 bg-cyan-100/80">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                      </svg>
+                    </span>
+                    <span class="text-sm font-semibold">Liquidez</span>
+                  </div>
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                <td class="py-5 px-7 align-middle border-r border-cyan-200/60 leading-relaxed text-sm text-slate-800 bg-cyan-50/45 hover:bg-cyan-100/60 transition-colors">
                   Los LPs pueden retirar su liquidez en cualquier momento
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                <td class="py-5 px-7 align-middle leading-relaxed text-sm text-slate-800 bg-violet-50/45 hover:bg-violet-100/60 transition-colors">
                   Los tokens bloqueados en staking no pueden retirarse fácilmente
                 </td>
               </tr>
-              <tr class="bg-white hover:bg-sky-50/50 transition-colors">
-                <td class="py-4 px-5 font-semibold text-slate-900 text-center align-middle border-r border-slate-300 text-aspecto">
-                  Relación
+
+              <!-- Relación -->
+              <tr class="transition-colors duration-150">
+                <td class="py-5 px-6 font-semibold text-slate-900 text-center align-middle border-r border-slate-200 bg-slate-50/70">
+                  <div class="flex items-center justify-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-indigo-600 bg-indigo-100/80">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                      </svg>
+                    </span>
+                    <span class="text-sm font-semibold">Relación</span>
+                  </div>
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle border-r border-slate-300 text-content">
+                <td class="py-5 px-7 align-middle border-r border-cyan-200/60 leading-relaxed text-sm text-slate-800 bg-cyan-50/25 hover:bg-cyan-100/50 transition-colors">
                   Los tokens LP pueden ser utilizados para staking en algunos protocolos
                 </td>
-                <td class="py-4 px-6 text-slate-800 align-middle text-content">
+                <td class="py-5 px-7 align-middle leading-relaxed text-sm text-slate-800 bg-violet-50/25 hover:bg-violet-100/50 transition-colors">
                   Algunos protocolos permiten staking de tokens LP para mayores recompensas
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>
 
-        <!-- Vista Tarjetas -->
-        <div id="cards-wrapper" class="flex flex-col gap-5 w-full">
+        <!-- VISTA MÓVIL: Tarjetas a color con jerarquía visual ergonómica -->
+        <div class="flex md:hidden flex-col divide-y divide-slate-200">
+          
           <!-- Mecánica -->
-          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
-              Mecánica
+          <article class="p-4 sm:p-5 flex flex-col gap-3 bg-white">
+            <div class="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-blue-600 bg-blue-100/80">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                </svg>
+              </span>
+              <span>Mecánica</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Proveedor de Liquidez (PL)
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+            <div class="flex flex-col gap-2.5 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50/60 border border-cyan-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-cyan-900">
+                    Proveedor de Liquidez (PL)
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Aportar activos a un pool de liquidez para facilitar intercambios
                 </p>
               </div>
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Staking
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50/60 border border-violet-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-violet-900">
+                    Staking
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Bloquear tokens para asegurar una red o recibir recompensas
                 </p>
               </div>
@@ -178,24 +208,35 @@
           </article>
 
           <!-- Recompensas -->
-          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
-              Recompensas
+          <article class="p-4 sm:p-5 flex flex-col gap-3 bg-white">
+            <div class="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-600 bg-emerald-100/80">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </span>
+              <span>Recompensas</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Proveedor de Liquidez (PL)
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+            <div class="flex flex-col gap-2.5 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50/60 border border-cyan-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-cyan-900">
+                    Proveedor de Liquidez (PL)
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Comisiones de transacción del pool
                 </p>
               </div>
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Staking
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50/60 border border-violet-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-violet-900">
+                    Staking
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Recompensas en tokens adicionales
                 </p>
               </div>
@@ -203,24 +244,35 @@
           </article>
 
           <!-- Riesgo principal -->
-          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
-              Riesgo principal
+          <article class="p-4 sm:p-5 flex flex-col gap-3 bg-white">
+            <div class="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-amber-600 bg-amber-100/80">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              </span>
+              <span>Riesgo principal</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Proveedor de Liquidez (PL)
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+            <div class="flex flex-col gap-2.5 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50/60 border border-cyan-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-cyan-900">
+                    Proveedor de Liquidez (PL)
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Impermanent loss, desbalance en el pool
                 </p>
               </div>
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Staking
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50/60 border border-violet-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-violet-900">
+                    Staking
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Riesgo de bloqueo de tokens, posibles fallos en la red
                 </p>
               </div>
@@ -228,24 +280,35 @@
           </article>
 
           <!-- Liquidez -->
-          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
-              Liquidez
+          <article class="p-4 sm:p-5 flex flex-col gap-3 bg-white">
+            <div class="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-cyan-600 bg-cyan-100/80">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                </svg>
+              </span>
+              <span>Liquidez</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Proveedor de Liquidez (PL)
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+            <div class="flex flex-col gap-2.5 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50/60 border border-cyan-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-cyan-900">
+                    Proveedor de Liquidez (PL)
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Los LPs pueden retirar su liquidez en cualquier momento
                 </p>
               </div>
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Staking
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50/60 border border-violet-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-violet-900">
+                    Staking
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Los tokens bloqueados en staking no pueden retirarse fácilmente
                 </p>
               </div>
@@ -253,104 +316,44 @@
           </article>
 
           <!-- Relación -->
-          <article class="rounded-xl border border-slate-300 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="bg-[#1c2e44] text-white px-5 py-3 font-bold text-aspecto tracking-wide border-b border-[#152335]">
-              Relación
+          <article class="p-4 sm:p-5 flex flex-col gap-3 bg-white">
+            <div class="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-indigo-600 bg-indigo-100/80">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                </svg>
+              </span>
+              <span>Relación</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-white">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Proveedor de Liquidez (PL)
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+            <div class="flex flex-col gap-2.5 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50/60 border border-cyan-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-cyan-900">
+                    Proveedor de Liquidez (PL)
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Los tokens LP pueden ser utilizados para staking en algunos protocolos
                 </p>
               </div>
-              <div class="p-4 sm:p-5 flex flex-col gap-2 bg-slate-50/60">
-                <span class="inline-block px-2.5 py-1 rounded bg-slate-200/80 text-slate-700 text-xs font-bold uppercase tracking-wider w-fit">
-                  Staking
-                </span>
-                <p class="text-slate-800 leading-relaxed text-content">
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50/60 border border-violet-200/80 flex flex-col gap-1.5 shadow-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-600"></span>
+                  <span class="font-bold text-[11px] tracking-wider uppercase text-violet-900">
+                    Staking
+                  </span>
+                </div>
+                <p class="text-slate-800 leading-relaxed font-normal">
                   Algunos protocolos permiten staking de tokens LP para mayores recompensas
                 </p>
               </div>
             </div>
           </article>
-        </div>
 
-        <p id="table-hint" class="text-[11px] sm:text-xs text-slate-400 text-center hidden">
-          (Desliza horizontalmente la tabla para ver todas las columnas)
-        </p>
+        </div>
 
       </section>
     </main>
-
-    <script>
-      let currentMode = 'auto';
-      let textSizeIndex = 0;
-      const textSizes = ['normal', 'large', 'xlarge'];
-      const textSizeLabels = ['A (Normal)', 'A+ (Grande)', 'A++ (Muy Grande)'];
-
-      const tableWrapper = document.getElementById('table-wrapper');
-      const cardsWrapper = document.getElementById('cards-wrapper');
-      const tableHint = document.getElementById('table-hint');
-      const contentContainer = document.getElementById('content-container');
-      const labelTextSize = document.getElementById('label-text-size');
-
-      const btnAuto = document.getElementById('btn-view-auto');
-      const btnTable = document.getElementById('btn-view-table');
-      const btnCards = document.getElementById('btn-view-cards');
-
-      function updateLayout() {
-        const isMobile = window.innerWidth < 768;
-
-        btnAuto.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'auto' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
-        btnTable.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'table' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
-        btnCards.className = "px-2.5 sm:px-3 py-1.5 rounded-md transition-colors " + (currentMode === 'cards' ? "bg-white text-slate-900 shadow-xs font-semibold" : "hover:text-slate-900");
-
-        if (currentMode === 'auto') {
-          if (isMobile) {
-            tableWrapper.classList.add('hidden');
-            cardsWrapper.classList.remove('hidden');
-            tableHint.classList.add('hidden');
-          } else {
-            tableWrapper.classList.remove('hidden');
-            cardsWrapper.classList.add('hidden');
-            tableHint.classList.add('hidden');
-          }
-        } else if (currentMode === 'table') {
-          tableWrapper.classList.remove('hidden');
-          cardsWrapper.classList.add('hidden');
-          if (isMobile) {
-            tableHint.classList.remove('hidden');
-          } else {
-            tableHint.classList.add('hidden');
-          }
-        } else if (currentMode === 'cards') {
-          tableWrapper.classList.add('hidden');
-          cardsWrapper.classList.remove('hidden');
-          tableHint.classList.add('hidden');
-        }
-      }
-
-      function setViewMode(mode) {
-        currentMode = mode;
-        updateLayout();
-      }
-
-      function toggleTextSize() {
-        textSizeIndex = (textSizeIndex + 1) % textSizes.length;
-        contentContainer.className = "w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 font-size-" + textSizes[textSizeIndex];
-        labelTextSize.textContent = textSizeLabels[textSizeIndex];
-      }
-
-      window.addEventListener('resize', () => {
-        if (currentMode === 'auto') {
-          updateLayout();
-        }
-      });
-
-      updateLayout();
-    </script>
   </body>
 </html>
