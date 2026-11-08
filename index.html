@@ -7,154 +7,637 @@
     <meta name="description" content="Acceso directo al ecosistema de módulos financieros." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-main: #07090e;
+        --card-bg: rgba(14, 19, 34, 0.88);
+        --card-hover: #131a2d;
+        --card-border: rgba(255, 255, 255, 0.08);
+        --card-border-hover: rgba(245, 158, 11, 0.45);
+        --accent-amber: #f59e0b;
+        --accent-amber-glow: rgba(245, 158, 11, 0.15);
+        --accent-cyan: #06b6d4;
+        --accent-emerald: #10b981;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-accent: #fcd34d;
+      }
+
       body {
-        background-color: #07090e;
-        color: #f1f5f9;
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-primary);
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         min-height: 100vh;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
-      .container {
-        max-width: 680px;
+
+      /* Subtle financial terminal grid */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-size: 60px 60px;
+        background-image: 
+          linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Ambient corporate illumination */
+      .ambient-glow-top {
+        position: fixed;
+        top: -150px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 450px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 40%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(80px);
+      }
+
+      .ambient-glow-bottom {
+        position: fixed;
+        bottom: -150px;
+        right: -100px;
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(100px);
+      }
+
+      /* Top Header */
+      .portal-header {
+        position: relative;
+        z-index: 10;
         width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(7, 9, 14, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
-      .content-paragraph {
-        font-size: 1.125rem;
-        font-weight: 300;
-        line-height: 1.7;
-        color: #cbd5e1;
-        margin-bottom: 2.5rem;
-        letter-spacing: 0.01em;
-        text-wrap: balance;
-      }
-      .menu-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 0.875rem;
-        list-style: none;
-      }
-      .menu-link {
+
+      .header-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1.125rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1.25rem;
-        background: #0e1320;
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 12px;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: var(--accent-amber);
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+
+      .header-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .telemetry-bar {
+        width: 80px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 9999px;
+        overflow: hidden;
+      }
+
+      .telemetry-fill {
+        width: 75%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(245, 158, 11, 0.7), rgba(16, 185, 129, 0.7));
+      }
+
+      /* Main container structure */
+      .main-wrapper {
+        position: relative;
+        z-index: 10;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+      }
+
+      .container {
+        max-width: 980px;
+        width: 100%;
+        position: relative;
+      }
+
+      /* Institutional Frame */
+      .institutional-frame {
+        background: rgba(11, 15, 26, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.8);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Precision corner tick marks */
+      .tick-tl, .tick-tr, .tick-bl, .tick-br {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        pointer-events: none;
+      }
+      .tick-tl { top: 12px; left: 12px; border-top: 1px solid rgba(245, 158, 11, 0.4); border-left: 1px solid rgba(245, 158, 11, 0.4); }
+      .tick-tr { top: 12px; right: 12px; border-top: 1px solid rgba(245, 158, 11, 0.4); border-right: 1px solid rgba(245, 158, 11, 0.4); }
+      .tick-bl { bottom: 12px; left: 12px; border-bottom: 1px solid rgba(245, 158, 11, 0.4); border-left: 1px solid rgba(245, 158, 11, 0.4); }
+      .tick-br { bottom: 12px; right: 12px; border-bottom: 1px solid rgba(245, 158, 11, 0.4); border-right: 1px solid rgba(245, 158, 11, 0.4); }
+
+      /* Header Paragraph */
+      .content-paragraph {
+        font-size: 1.125rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #e2e8f0;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+        max-width: 620px;
+      }
+
+      .divider-line {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .divider-line::before {
+        content: '';
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(to right, rgba(245, 158, 11, 0.4), rgba(255, 255, 255, 0.08), transparent);
+      }
+
+      .divider-rhombus {
+        width: 6px;
+        height: 6px;
+        background: rgba(245, 158, 11, 0.6);
+        transform: rotate(45deg);
+      }
+
+      /* Menu Grid - 3x2 on Desktop, 2x3 on Tablet, 1x6 on Mobile */
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+        list-style: none;
+      }
+
+      .menu-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.25rem;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
         text-decoration: none;
         color: inherit;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        min-height: 140px;
       }
-      .menu-link:hover {
-        background: #141b2d;
+
+      .menu-link:hover, .menu-link:focus-visible {
+        background: var(--card-hover);
+        border-color: var(--card-border-hover);
+        transform: translateY(-4px);
+        box-shadow: 0 14px 34px -8px rgba(245, 158, 11, 0.22);
+        outline: none;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .card-icon-frame {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .menu-link:hover .card-icon-frame {
+        background: rgba(245, 158, 11, 0.1);
         border-color: rgba(245, 158, 11, 0.4);
-        transform: translateY(-2px);
       }
+
+      .card-icon-frame svg {
+        width: 18px;
+        height: 18px;
+        stroke: #94a3b8;
+        transition: stroke 0.2s ease;
+      }
+
+      .menu-link:hover .card-icon-frame svg {
+        stroke: var(--accent-amber);
+      }
+
+      .arrow-frame {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .arrow {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #94a3b8;
+        transition: all 0.2s ease;
+        line-height: 1;
+      }
+
+      .menu-link:hover .arrow-frame {
+        background: var(--accent-amber);
+        border-color: var(--accent-amber);
+        transform: translate(2px, -2px);
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.45);
+      }
+
+      .menu-link:hover .arrow {
+        color: #07090e;
+      }
+
       .item-info {
         display: flex;
         flex-direction: column;
-        gap: 0.15rem;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
       }
+
       .item-name {
-        font-size: 0.9375rem;
-        font-weight: 600;
+        font-size: 1.125rem;
+        font-weight: 700;
         color: #ffffff;
-        transition: color 0.2s;
+        letter-spacing: -0.01em;
+        transition: color 0.2s ease;
       }
+
       .menu-link:hover .item-name {
-        color: #fcd34d;
+        color: var(--text-accent);
       }
+
       .item-file {
         font-size: 0.75rem;
-        color: #94a3b8;
+        color: var(--text-secondary);
         font-family: 'JetBrains Mono', monospace;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
       }
-      .arrow {
-        font-size: 1rem;
-        color: #94a3b8;
-        transition: transform 0.2s, color 0.2s;
+
+      .file-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #475569;
+        transition: background-color 0.2s ease;
       }
-      .menu-link:hover .arrow {
-        color: #f59e0b;
-        transform: translate(2px, -2px);
+
+      .menu-link:hover .file-dot {
+        background-color: var(--accent-amber);
+      }
+
+      /* Micro Sparkline Curve in each module */
+      .sparkline-wrapper {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 0.5rem;
+        width: 100%;
+      }
+
+      .sparkline-wrapper svg {
+        width: 100%;
+        height: 24px;
+        overflow: visible;
+      }
+
+      .sparkline-line {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.16);
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke 0.3s ease, stroke-width 0.3s ease;
+      }
+
+      .menu-link:hover .sparkline-line {
+        stroke: var(--accent-amber);
+        stroke-width: 1.8;
+      }
+
+      /* Footer */
+      .portal-footer {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(7, 9, 14, 0.6);
+        padding: 1rem 0;
+      }
+
+      .footer-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+
+      @media (max-width: 640px) {
+        .institutional-frame {
+          padding: 1.5rem;
+        }
+        .header-container, .footer-container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="root">
-      <main class="container">
-        <!-- Único párrafo de contenido (< 200 palabras) -->
-        <p class="content-paragraph">
-          Seleccione un módulo a continuación para acceder de inmediato.
-        </p>
+    <!-- Top Ambient Lights -->
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
 
-        <!-- Menú que lleva a los archivos HTML alojados en el mismo nivel -->
-        <nav aria-label="Menú principal">
-          <ul class="menu-grid">
-            <li>
-              <a href="bitcoin.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">Bitcoin</span>
-                  <span class="item-file">bitcoin.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-            <li>
-              <a href="componentes.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">Componentes</span>
-                  <span class="item-file">componentes.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-            <li>
-              <a href="estadisticas.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">Estadísticas</span>
-                  <span class="item-file">estadisticas.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-            <li>
-              <a href="ipo.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">IPO</span>
-                  <span class="item-file">ipo.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-            <li>
-              <a href="pagos.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">Pagos</span>
-                  <span class="item-file">pagos.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-            <li>
-              <a href="plvss.html" class="menu-link">
-                <div class="item-info">
-                  <span class="item-name">PLVSS</span>
-                  <span class="item-file">plvss.html</span>
-                </div>
-                <span class="arrow">↗</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+    <!-- Header -->
+    <header class="portal-header">
+      <div class="header-container">
+        <div class="brand-lockup">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 3v18" />
+              <path d="M3 12h18" />
+            </svg>
+          </div>
+          <span class="brand-title">Portal</span>
+        </div>
+        <div class="header-status">
+          <div class="telemetry-bar">
+            <div class="telemetry-fill"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div id="root" class="main-wrapper">
+      <main class="container">
+        <div class="institutional-frame">
+          <!-- Corner Tick Marks -->
+          <div class="tick-tl"></div>
+          <div class="tick-tr"></div>
+          <div class="tick-bl"></div>
+          <div class="tick-br"></div>
+
+          <!-- Único párrafo de contenido (< 200 palabras) -->
+          <p class="content-paragraph">
+            Seleccione un módulo a continuación para acceder de inmediato.
+          </p>
+          <div class="divider-line">
+            <div class="divider-rhombus"></div>
+          </div>
+
+          <!-- Menú que lleva a los archivos HTML alojados en el mismo nivel -->
+          <nav aria-label="Menú principal">
+            <ul class="menu-grid">
+              <li>
+                <a href="bitcoin.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M11 7h3a2 2 0 0 1 2 2 2 2 0 0 1-2 2H9m2-4v2m-2 2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2H9m2 2v2m-2-6h6" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">Bitcoin</span>
+                    <span class="item-file"><span class="file-dot"></span>bitcoin.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,20 15,18 30,19 45,13 60,15 75,9 90,12 105,5 120,2" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="componentes.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                        <line x1="12" y1="22.08" x2="12" y2="12" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">Componentes</span>
+                    <span class="item-file"><span class="file-dot"></span>componentes.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,22 15,20 30,16 45,18 60,13 75,15 90,9 105,7 120,4" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="estadisticas.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10" />
+                        <line x1="12" y1="20" x2="12" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="14" />
+                        <path d="m3 3 7 7 4-4 7 7" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">Estadísticas</span>
+                    <span class="item-file"><span class="file-dot"></span>estadisticas.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,24 15,19 30,21 45,12 60,16 75,7 90,10 105,4 120,1" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="ipo.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="21" x2="21" y2="21" />
+                        <line x1="6" y1="18" x2="6" y2="11" />
+                        <line x1="10" y1="18" x2="10" y2="11" />
+                        <line x1="14" y1="18" x2="14" y2="11" />
+                        <line x1="18" y1="18" x2="18" y2="11" />
+                        <polygon points="12 3 2 9 22 9" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">IPO</span>
+                    <span class="item-file"><span class="file-dot"></span>ipo.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,21 15,23 30,17 45,19 60,11 75,13 90,6 105,8 120,2" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="pagos.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="14" x="2" y="5" rx="2" />
+                        <line x1="2" y1="10" x2="22" y2="10" />
+                        <line x1="6" y1="15" x2="10" y2="15" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">Pagos</span>
+                    <span class="item-file"><span class="file-dot"></span>pagos.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,18 15,16 30,15 45,16 60,12 75,13 90,9 105,8 120,5" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="plvss.html" class="menu-link">
+                  <div class="card-top">
+                    <div class="card-icon-frame">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                        <polyline points="16 7 22 7 22 13" />
+                      </svg>
+                    </div>
+                    <div class="arrow-frame">
+                      <span class="arrow">↗</span>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">PLVSS</span>
+                    <span class="item-file"><span class="file-dot"></span>plvss.html</span>
+                  </div>
+                  <div class="sparkline-wrapper">
+                    <svg viewBox="0 0 120 25">
+                      <polyline class="sparkline-line" points="0,23 15,19 30,22 45,14 60,12 75,7 90,11 105,4 120,1" />
+                    </svg>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </main>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Footer -->
+    <footer class="portal-footer">
+      <div class="footer-container">
+        <span>Portal</span>
+        <div class="telemetry-bar">
+          <div class="telemetry-fill"></div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
